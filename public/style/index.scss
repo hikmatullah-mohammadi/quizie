@@ -1,0 +1,18 @@
+$primary-color : (
+  lightgreen: hsl(115, 100%, 49%),
+  palelightgreen: hsl(305, 97%, 45%)
+);
+
+$neutral-color : (
+  grayish-blue = rgb(84, 94, 116),
+  gainsboro = gainsboro
+);
+
+@keyframes opacity-anim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
