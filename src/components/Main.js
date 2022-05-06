@@ -1,14 +1,12 @@
-import Header from './Header'
-import Footer from './Footer'
 import Login from './Login'
+import Signup from './Signup'
 
 
 const Main = () => {
   return (
     <main>
-      <Header />
-      <Login />
-      <Footer />
+      {/* <Login /> */}
+      <Signup />
     </main>
   )
 }

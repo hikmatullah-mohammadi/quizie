@@ -4,10 +4,75 @@ $primary-color : (
 );
 
 $neutral-color : (
-  grayish-blue = rgb(84, 94, 116),
-  gainsboro = gainsboro
+  dark-grayish-blue: rgb(84, 94, 116),
+  grayish-blue: rgb(169, 174, 184),
+  light-gainsboro: rgb(241, 239, 239)
 );
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Kubic;
+}
+body {
+  background-color: map-get($map: $neutral-color,$key: light-gainsboro);
+  main {
+    background-color: white;
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 15px;
+    .login-page {
+      padding: 2%;
+      h1 {
+        text-align: center;
+        padding: 20px 0;
+      }
+      input {
+        width: 100%;
+        height: 35px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border-width: 1px;
+        font-size: 20px;
+        padding: 0 10px;
+        color: map-get($map: $neutral-color, $key: dark-grayish-blue);
+      }
+      label {
+        color: map-get($map: $neutral-color, $key: dark-grayish-blue);
+        display: inline-block;
+        margin: 10px 0;
+      }
+      input[type=submit] {
+        color: black;
+        height: 40px;
+        margin-top: 10px;
+      }
+      p {
+        text-align: center;
+      }
+      .forgot-psw {
+        margin-top: 20px;
+      }
+      .new-here {
+        margin-top: 10px;
+        margin-bottom: 50px;
+      }
+    }
+    .signup-page {
+      @extend .login-page;
+      .alternative-signup {
+        margin: 20px auto 50px auto;
+        button {
+          width: 50%;
+          height: 40px;
+          font-size: 20px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
 @keyframes opacity-anim {
   from {
     opacity: 0;

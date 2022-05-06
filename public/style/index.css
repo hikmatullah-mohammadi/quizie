@@ -1,3 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Kubic;
+}
+
+body {
+  background-color: #f1efef;
+}
+
+body main {
+  background-color: white;
+  width: 90%;
+  margin: 20px auto;
+  border-radius: 15px;
+}
+
+body main .login-page, body main .signup-page {
+  padding: 2%;
+}
+
+body main .login-page h1, body main .signup-page h1 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+body main .login-page input, body main .signup-page input {
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border-width: 1px;
+  font-size: 20px;
+  padding: 0 10px;
+  color: #545e74;
+}
+
+body main .login-page label, body main .signup-page label {
+  color: #545e74;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+body main .login-page input[type=submit], body main .signup-page input[type=submit] {
+  color: black;
+  height: 40px;
+  margin-top: 10px;
+}
+
+body main .login-page p, body main .signup-page p {
+  text-align: center;
+}
+
+body main .login-page .forgot-psw, body main .signup-page .forgot-psw {
+  margin-top: 20px;
+}
+
+body main .login-page .new-here, body main .signup-page .new-here {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+body main .signup-page .alternative-signup {
+  margin: 20px auto 50px auto;
+}
+
+body main .signup-page .alternative-signup button {
+  width: 50%;
+  height: 40px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
 @-webkit-keyframes opacity-anim {
   from {
     opacity: 0;
@@ -6,6 +81,7 @@
     opacity: 1;
   }
 }
+
 @keyframes opacity-anim {
   from {
     opacity: 0;
