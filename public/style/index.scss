@@ -1,13 +1,20 @@
 $primary-color : (
-  lightgreen: hsl(115, 100%, 49%),
-  palelightgreen: hsl(305, 97%, 45%)
+  dark-chartreuse: rgb(9, 255, 0),
+  light-chartreuse: rgb(156, 245, 68),
+  lightred: rgb(248, 48, 48)
 );
 
 $neutral-color : (
-  dark-grayish-blue: rgb(84, 94, 116),
+  dark-grayish-blue: rgb(66, 73, 87),
   grayish-blue: rgb(169, 174, 184),
   light-gainsboro: rgb(241, 239, 239)
 );
+@function primary-color($c) {
+  @return map-get($map: $primary-color, $key: $c)
+};
+@function neutral-color($c) {
+  @return map-get($map: $neutral-color, $key: $c)
+}
 
 * {
   margin: 0;
@@ -69,6 +76,89 @@ body {
           font-size: 20px;
           margin-top: 10px;
         }
+      }
+    }
+    .questions {
+      padding: 2%;
+      h2 {
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 2px solid primary-color(dark-chartreuse);
+        margin-bottom: 30px;
+      }
+      .question {
+        .q-number {
+          display: inline-block;
+          width: 35px;
+          height: 35px;
+          background-color: primary-color(dark-chartreuse);
+          border-radius: 50%;
+          text-align: center;
+          font-weight: 900;
+          font-size: 1.7em;
+          // 20 minutes...
+          margin-right: 10px;
+          margin-bottom: 5px;
+          box-shadow: 0 1px red;
+          padding: 2px 0;
+          color: white;
+          text-shadow: 2px 2px primary-color(lightred);
+        }
+        .answers {
+          margin: 10px 0 25px 0;
+          li {
+            list-style-type: none;
+            padding: 5px;
+            margin: 5px;
+            color: neutral-color(dark-grayish-blue);
+            border: 2px solid neutral-color(grayish-blue);
+            border-radius: 8px;
+            font-weight: bold;
+            &:hover {
+              cursor: pointer;
+              span {
+                background-color: primary-color(dark-chartreuse);
+              }
+            }
+            span {
+              @extend .q-number;
+              width: 20px;
+              height: 20px;
+              font-weight: normal;
+              font-size: 12px;
+              padding: 3px 0;
+              text-shadow: 1px 1px primary-color(lightred);
+              background-color: neutral-color(grayish-blue);
+            }
+            .selected-answer {
+              background-color: primary-color(dark-chartreuse);
+            }
+          }
+          .correct-answer {
+            border-color: primary-color(dark-chartreuse);
+            color: primary-color(dark-chartreuse);
+            span {
+              background-color: primary-color(dark-chartreuse);
+            }
+          }
+          .wrong-answer {
+            border-color: primary-color(lightred);
+            color: primary-color(lightred);
+            span {
+              background-color: primary-color(lightred);
+              box-shadow: 1px 1px primary-color(dark-chartreuse);
+            }
+          }
+        }
+      }
+      .btn-submit {
+        background-color: primary-color(dark-chartreuse);
+        color: white;
+        border-radius: 5px;
+        font-weight: 900;
+        width: 100%;
+        height: 35px;
+        margin-bottom: 20px;
       }
     }
   }

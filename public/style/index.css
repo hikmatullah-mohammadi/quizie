@@ -34,11 +34,11 @@ body main .login-page input, body main .signup-page input {
   border-width: 1px;
   font-size: 20px;
   padding: 0 10px;
-  color: #545e74;
+  color: #424957;
 }
 
 body main .login-page label, body main .signup-page label {
-  color: #545e74;
+  color: #424957;
   display: inline-block;
   margin: 10px 0;
 }
@@ -71,6 +71,101 @@ body main .signup-page .alternative-signup button {
   height: 40px;
   font-size: 20px;
   margin-top: 10px;
+}
+
+body main .questions {
+  padding: 2%;
+}
+
+body main .questions h2 {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 2px solid #09ff00;
+  margin-bottom: 30px;
+}
+
+body main .questions .question .q-number, body main .questions .question .answers li span {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color: #09ff00;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.7em;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  -webkit-box-shadow: 0 1px red;
+          box-shadow: 0 1px red;
+  padding: 2px 0;
+  color: white;
+  text-shadow: 2px 2px #f83030;
+}
+
+body main .questions .question .answers {
+  margin: 10px 0 25px 0;
+}
+
+body main .questions .question .answers li {
+  list-style-type: none;
+  padding: 5px;
+  margin: 5px;
+  color: #424957;
+  border: 2px solid #a9aeb8;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+body main .questions .question .answers li:hover {
+  cursor: pointer;
+}
+
+body main .questions .question .answers li:hover span {
+  background-color: #09ff00;
+}
+
+body main .questions .question .answers li span {
+  width: 20px;
+  height: 20px;
+  font-weight: normal;
+  font-size: 12px;
+  padding: 3px 0;
+  text-shadow: 1px 1px #f83030;
+  background-color: #a9aeb8;
+}
+
+body main .questions .question .answers li .selected-answer {
+  background-color: #09ff00;
+}
+
+body main .questions .question .answers .correct-answer {
+  border-color: #09ff00;
+  color: #09ff00;
+}
+
+body main .questions .question .answers .correct-answer span {
+  background-color: #09ff00;
+}
+
+body main .questions .question .answers .wrong-answer {
+  border-color: #f83030;
+  color: #f83030;
+}
+
+body main .questions .question .answers .wrong-answer span {
+  background-color: #f83030;
+  -webkit-box-shadow: 1px 1px #09ff00;
+          box-shadow: 1px 1px #09ff00;
+}
+
+body main .questions .btn-submit {
+  background-color: #09ff00;
+  color: white;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
 }
 
 @-webkit-keyframes opacity-anim {
