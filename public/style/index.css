@@ -6,6 +6,31 @@
   font-family: Kubic;
 }
 
+.loading-display {
+  background-color: rgba(0, 0, 0, 0.753);
+  position: fixed;
+  inset: 0 0;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.loading-display div {
+  width: 100%;
+}
+
+.loading-display div p {
+  text-align: center;
+  color: white;
+}
+
+.loading-display div hr {
+  float: left;
+  width: 5%;
+  -webkit-animation: linear 3s rotate-anim infinite;
+          animation: linear 3s rotate-anim infinite;
+}
+
 body {
   background-color: #f1efef;
 }
@@ -127,9 +152,7 @@ body main .questions .question .answers li:hover span {
 body main .questions .question .answers li span {
   width: 20px;
   height: 20px;
-  font-weight: normal;
-  font-size: 12px;
-  padding: 3px 0;
+  font-size: 16px;
   text-shadow: 1px 1px #f83030;
   background-color: #a9aeb8;
 }
@@ -183,6 +206,30 @@ body main .questions .btn-submit {
   }
   to {
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes rotate-anim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    background-color: blue;
+  }
+}
+
+@keyframes rotate-anim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    background-color: blue;
   }
 }
 /*# sourceMappingURL=index.css.map */

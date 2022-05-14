@@ -22,6 +22,27 @@ $neutral-color : (
   box-sizing: border-box;
   font-family: Kubic;
 }
+
+.loading-display {
+  background-color: rgba(0, 0, 0, 0.753);
+  position: fixed;
+  inset: 0 0;
+  display: grid;
+  place-items: center;
+  div {
+    width: 100%;
+    p {
+      text-align: center;
+      color: white;
+    }
+    hr {
+      float: left;
+      width: 5%;
+      animation: linear 3s rotate-anim infinite;
+    }
+  }
+}
+
 body {
   background-color: map-get($map: $neutral-color,$key: light-gainsboro);
   main {
@@ -124,9 +145,7 @@ body {
               @extend .q-number;
               width: 20px;
               height: 20px;
-              font-weight: normal;
-              font-size: 12px;
-              padding: 3px 0;
+              font-size: 16px;
               text-shadow: 1px 1px primary-color(lightred);
               background-color: neutral-color(grayish-blue);
             }
@@ -169,5 +188,14 @@ body {
   }
   to {
     opacity: 1;
+  }
+}
+@keyframes rotate-anim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    background-color: blue;
   }
 }
