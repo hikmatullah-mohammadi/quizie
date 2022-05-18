@@ -25,6 +25,14 @@ $neutral-color : (
   width: 100%;
   height: 35px;
   margin-bottom: 20px;
+};
+@mixin home-elem-style {
+  text-align: center;
+  border: 2px dashed primary-color(lightred);
+  border-radius: 20px 0 20px 0;
+  background-color: primary-color(home-bg);
+  padding: 20px 5px;
+  margin-bottom: 10px;
 }
 
 * {
@@ -124,20 +132,18 @@ body {
     .home-not-logged-in {
       padding: 15px;
       .welcome-msg {
-        margin-bottom: 10px;
-        text-align: center;
-        border: 2px dashed primary-color(lightred);
-        border-radius: 20px 0 10px 0;
-        background-color: primary-color(home-bg);
-        padding: 20px 5px;
+        @include home-elem-style();
+        .dollor {
+          background-color: primary-color(dark-chartreuse);
+          background-color: gold;
+          font-weight: bold;
+          color: white;
+          border-radius: 5px;
+          padding: 5px;
+        }
       }
       .difficulties, .categories {
-        margin-bottom: 10px;
-        text-align: center;
-        border: 2px dashed primary-color(lightred);
-        border-radius: 20px 0 10px 0;
-        background-color: primary-color(home-bg);
-        padding: 20px;
+        @include home-elem-style();
         h3 {
           color: black;
           padding-bottom: 20px;
@@ -153,6 +159,42 @@ body {
         }
       }
       .btn-get-started {
+        @include btn-style();
+      }
+    }
+    .home-logged-in {
+      padding: 15px;
+      h3 {
+        @include home-elem-style();
+      }
+      .records {
+        p {
+          @include home-elem-style();
+          line-height: 25px;
+          span {
+            background-color: gold;
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+            padding: 5px;
+          }
+        }
+        .rating {
+          @include home-elem-style();
+          padding-bottom: 10px;
+          .fa-star {
+            color: yellow;
+            font-size: 80px;
+            animation: star-anim infinite 10s linear;
+          }
+          span {
+            position: relative;
+            top: -50px;
+            font-weight: bold;
+          }
+        }
+      }
+      .btn-take-quiz {
         @include btn-style();
       }
     }
@@ -287,5 +329,10 @@ body {
   to {
     transform: rotate(360deg);
     background-color: blue;
+  }
+}
+@keyframes star-anim {
+  to {
+    transform: rotate(360deg);
   }
 }

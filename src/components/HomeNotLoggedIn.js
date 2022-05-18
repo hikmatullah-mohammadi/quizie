@@ -3,7 +3,7 @@ const HomeNotLoggedIn = () => {
     <div className="home-not-logged-in">
       <div className="welcome-msg">
         <p>Tons of multiple choice questions are available here.</p>
-        <p>Assess your knowledge in your favorite subject at $0.</p>
+        <p>Assess your knowledge in your favorite subject at <span className="dollor">$0</span>.</p>
       </div>
       <div>
         <div className="categories">

@@ -151,9 +151,10 @@ const Questions = () => {
       <h2>Python (20q)</h2>
       <div>
         { elements }
+        {/* displayed after submitting */}
         <div className="result" style={{display: status.isSubmitted ? "block" : "none"}}>
           <p>Correct answers: {numberOfCorrectAnswers} out of {questions.length}</p>
-          <progress value={numberOfCorrectAnswers * 100 / questions.length} min="0" max="100" step="1"/>
+          <progress value={numberOfCorrectAnswers * 100 / questions.length || ""} min="0" max="100" step="1"/>
           <p>{numberOfCorrectAnswers * 100 / questions.length}%</p>
         </div>
         <button className='btn-submit' onClick={handleSubmit}>

@@ -113,21 +113,30 @@ body main .home-not-logged-in {
 }
 
 body main .home-not-logged-in .welcome-msg {
-  margin-bottom: 10px;
   text-align: center;
   border: 2px dashed #f83030;
-  border-radius: 20px 0 10px 0;
+  border-radius: 20px 0 20px 0;
   background-color: #5beea9;
   padding: 20px 5px;
+  margin-bottom: 10px;
+}
+
+body main .home-not-logged-in .welcome-msg .dollor {
+  background-color: #09ff00;
+  background-color: gold;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 body main .home-not-logged-in .difficulties, body main .home-not-logged-in .categories {
-  margin-bottom: 10px;
   text-align: center;
   border: 2px dashed #f83030;
-  border-radius: 20px 0 10px 0;
+  border-radius: 20px 0 20px 0;
   background-color: #5beea9;
-  padding: 20px;
+  padding: 20px 5px;
+  margin-bottom: 10px;
 }
 
 body main .home-not-logged-in .difficulties h3, body main .home-not-logged-in .categories h3 {
@@ -147,6 +156,70 @@ body main .home-not-logged-in .difficulties ul li, body main .home-not-logged-in
 }
 
 body main .home-not-logged-in .btn-get-started {
+  background-color: #09ff00;
+  color: white;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+body main .home-logged-in {
+  padding: 15px;
+}
+
+body main .home-logged-in h3 {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #5beea9;
+  padding: 20px 5px;
+  margin-bottom: 10px;
+}
+
+body main .home-logged-in .records p {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #5beea9;
+  padding: 20px 5px;
+  margin-bottom: 10px;
+  line-height: 25px;
+}
+
+body main .home-logged-in .records p span {
+  background-color: gold;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+body main .home-logged-in .records .rating {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #5beea9;
+  padding: 20px 5px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+body main .home-logged-in .records .rating .fa-star {
+  color: yellow;
+  font-size: 80px;
+  -webkit-animation: star-anim infinite 10s linear;
+          animation: star-anim infinite 10s linear;
+}
+
+body main .home-logged-in .records .rating span {
+  position: relative;
+  top: -50px;
+  font-weight: bold;
+}
+
+body main .home-logged-in .btn-take-quiz {
   background-color: #09ff00;
   color: white;
   border-radius: 5px;
@@ -338,6 +411,20 @@ body main .alert-box div p:last-child {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
     background-color: blue;
+  }
+}
+
+@-webkit-keyframes star-anim {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes star-anim {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 /*# sourceMappingURL=index.css.map */
