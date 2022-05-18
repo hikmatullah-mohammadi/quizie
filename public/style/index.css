@@ -42,6 +42,16 @@ body main {
   border-radius: 15px;
 }
 
+body main header h1 {
+  text-align: center;
+  padding: 20px;
+}
+
+body main header h1::first-letter {
+  font-size: 1.5em;
+  color: #09ff00;
+}
+
 body main .login-page, body main .signup-page {
   padding: 2%;
 }
@@ -96,6 +106,54 @@ body main .signup-page .alternative-signup button {
   height: 40px;
   font-size: 20px;
   margin-top: 10px;
+}
+
+body main .home-not-logged-in {
+  padding: 15px;
+}
+
+body main .home-not-logged-in .welcome-msg {
+  margin-bottom: 10px;
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 10px 0;
+  background-color: #5beea9;
+  padding: 20px 5px;
+}
+
+body main .home-not-logged-in .difficulties, body main .home-not-logged-in .categories {
+  margin-bottom: 10px;
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 10px 0;
+  background-color: #5beea9;
+  padding: 20px;
+}
+
+body main .home-not-logged-in .difficulties h3, body main .home-not-logged-in .categories h3 {
+  color: black;
+  padding-bottom: 20px;
+  border-bottom: 1px solid red;
+}
+
+body main .home-not-logged-in .difficulties ul, body main .home-not-logged-in .categories ul {
+  margin-top: 10px;
+  list-style-type: none;
+}
+
+body main .home-not-logged-in .difficulties ul li, body main .home-not-logged-in .categories ul li {
+  margin: 5px auto;
+  border-bottom: blue 1px solid;
+}
+
+body main .home-not-logged-in .btn-get-started {
+  background-color: #09ff00;
+  color: white;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
 }
 
 body main .questions {
@@ -181,6 +239,24 @@ body main .questions .question .answers .wrong-answer span {
           box-shadow: 1px 1px #09ff00;
 }
 
+body main .questions .result {
+  margin: 20px 0;
+  padding: 20px;
+  text-align: center;
+  background-color: #09ff00;
+  border-radius: 10px;
+  font-weight: bold;
+  -webkit-animation: opacity-anim 1s ease-in;
+          animation: opacity-anim 1s ease-in;
+}
+
+body main .questions .result progress {
+  -webkit-animation: opacity-anim 1s ease-in;
+          animation: opacity-anim 1s ease-in;
+  width: 100%;
+  height: 20px;
+}
+
 body main .questions .btn-submit {
   background-color: #09ff00;
   color: white;
@@ -188,6 +264,38 @@ body main .questions .btn-submit {
   font-weight: 900;
   width: 100%;
   height: 35px;
+  margin-bottom: 20px;
+}
+
+body main .alert-box {
+  position: fixed;
+  inset: 0 0 0 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-animation: opacity-anim 1s ease-in-out;
+          animation: opacity-anim 1s ease-in-out;
+}
+
+body main .alert-box div {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 250px;
+}
+
+body main .alert-box div p:first-child {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+body main .alert-box div hr {
+  margin: 10px 0 30px 0;
+}
+
+body main .alert-box div p:last-child {
+  text-align: center;
   margin-bottom: 20px;
 }
 

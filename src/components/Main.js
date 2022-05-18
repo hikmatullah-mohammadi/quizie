@@ -1,9 +1,13 @@
 import Questions from './Questions'
+import HomeNotLoggedIn from './HomeNotLoggedIn'
+import Header from './Header'
 
 const Main = () => {
   return (
     <main>
-      <Questions />
+      <Header />
+      {/* <Questions /> */}
+      <HomeNotLoggedIn />
     </main>
   )
 }

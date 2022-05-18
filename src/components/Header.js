@@ -1,1 +1,1 @@
-export default () => <header>-----</header>
+export default () => <header><h1>Quizie</h1></header>

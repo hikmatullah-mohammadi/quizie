@@ -1,7 +1,8 @@
 $primary-color : (
   dark-chartreuse: rgb(9, 255, 0),
   light-chartreuse: rgb(156, 245, 68),
-  lightred: rgb(248, 48, 48)
+  lightred: rgb(248, 48, 48),
+  home-bg: rgb(91, 238, 169)
 );
 
 $neutral-color : (
@@ -14,6 +15,16 @@ $neutral-color : (
 };
 @function neutral-color($c) {
   @return map-get($map: $neutral-color, $key: $c)
+};
+
+@mixin btn-style {
+  background-color: primary-color(dark-chartreuse);
+  color: white;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
 }
 
 * {
@@ -50,6 +61,16 @@ body {
     width: 90%;
     margin: 20px auto;
     border-radius: 15px;
+    header {
+      h1 {
+        text-align: center;
+        padding: 20px;
+        &::first-letter {
+          font-size: 1.5em;
+          color: primary-color(dark-chartreuse);
+        }
+      }
+    }
     .login-page {
       padding: 2%;
       h1 {
@@ -97,6 +118,42 @@ body {
           font-size: 20px;
           margin-top: 10px;
         }
+      }
+    }
+
+    .home-not-logged-in {
+      padding: 15px;
+      .welcome-msg {
+        margin-bottom: 10px;
+        text-align: center;
+        border: 2px dashed primary-color(lightred);
+        border-radius: 20px 0 10px 0;
+        background-color: primary-color(home-bg);
+        padding: 20px 5px;
+      }
+      .difficulties, .categories {
+        margin-bottom: 10px;
+        text-align: center;
+        border: 2px dashed primary-color(lightred);
+        border-radius: 20px 0 10px 0;
+        background-color: primary-color(home-bg);
+        padding: 20px;
+        h3 {
+          color: black;
+          padding-bottom: 20px;
+          border-bottom: 1px solid red;
+        }
+        ul {
+          margin-top: 10px;
+          list-style-type: none;
+          li {
+            margin: 5px auto;
+            border-bottom: blue 1px solid;
+          }
+        }
+      }
+      .btn-get-started {
+        @include btn-style();
       }
     }
     .questions {
@@ -170,14 +227,47 @@ body {
           }
         }
       }
-      .btn-submit {
+      .result {
+        margin: 20px 0;
+        padding: 20px;
+        text-align: center;
         background-color: primary-color(dark-chartreuse);
-        color: white;
-        border-radius: 5px;
-        font-weight: 900;
-        width: 100%;
-        height: 35px;
-        margin-bottom: 20px;
+        border-radius: 10px;
+        font-weight: bold;
+        animation: opacity-anim 1s ease-in;
+        progress {
+          animation: opacity-anim 1s ease-in;
+          width: 100%;
+          height: 20px;
+        }
+      }
+      .btn-submit {
+        @include btn-style();
+      }
+    }
+    .alert-box {
+      position: fixed;
+      inset: 0 0 0 0;
+      background-color: rgba(128, 128, 128, 0.5);
+      display: grid;
+      place-items: center;
+      animation: opacity-anim 1s ease-in-out;
+      div {
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+        width: 250px;
+        p:first-child {
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+        hr {
+          margin: 10px 0 30px 0;
+        }
+        p:last-child {
+          text-align: center;
+          margin-bottom: 20px;
+        }
       }
     }
   }

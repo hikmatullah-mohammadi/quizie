@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from 'react'
 import data from './../data'
+import AlertBox from './AlertBox'
 
 const questionsReducer = (state, action) => {
   switch(action.type) {
@@ -13,26 +14,15 @@ const questionsReducer = (state, action) => {
   }
 }
 
-const positionCorrectAnswerIndexRandomly = (answers) => {
-  let randonIndex // between 0-3
-  while (true){
-    randonIndex = Math.floor(Math.random()*10)
-    if (randonIndex < 4) break
-  }
-  // swap the correct answer to its random position
-  let tmp = answers[0]
-  answers[0] = answers[randonIndex]
-  answers[randonIndex] = tmp
-  return answers
-}
-
 const Questions = () => {
   const [questions, answerDispatch] = useReducer(questionsReducer, [])
   const [status, setStatus] = useState({
     isSubmitting: false,
     isSubmitted: false
   })
-  
+  const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0)
+  const [displayAlertBox, setDisplayAlertBox] = useState(false)
+
   useEffect(() => {
     // put correct answer and incorrect answers together in an array
     const questions = data.map(q => ({
@@ -61,16 +51,29 @@ const Questions = () => {
   }
   
   const handleSubmit = () => {
+    let isAllQuestionsAnswered = true
+    questions.forEach(item => {
+      if (!item.selectedAnswer){        
+        isAllQuestionsAnswered = false
+        setDisplayAlertBox(true)
+        setTimeout(() => {
+          setDisplayAlertBox(false)
+        }, 2000);
+        return
+      }
+    })
+    if (!isAllQuestionsAnswered) {
+      return
+    }
     setStatus({...status, isSubmitting: true})
-    let numberOfCorrectAns = 0
+    let nCorrectAnswers = 0
     questions.forEach(q => {
       if (q.answers.indexOf(q.correctAnswer) === q.selectedAnswer-1) {
-        numberOfCorrectAns++
+        nCorrectAnswers++
       }
     });
     
-    console.log("Correct answers: ", numberOfCorrectAns)
-    console.log("Incorrect answers: ", questions.length - numberOfCorrectAns)
+    setNumberOfCorrectAnswers(nCorrectAnswers)
     setStatus({isSubmitting: false, isSubmitted: true})
   }
   const elements = questions.map((item, index) => (
@@ -137,15 +140,42 @@ const Questions = () => {
   ))
   return (
     <section className='questions'>
+      {/* display when not all questions are answered */}
+      { displayAlertBox &&
+        <AlertBox 
+        alertType="Error"
+        alertMsg="Please answer all the questions..."
+      />
+      }
+      
       <h2>Python (20q)</h2>
       <div>
         { elements }
+        <div className="result" style={{display: status.isSubmitted ? "block" : "none"}}>
+          <p>Correct answers: {numberOfCorrectAnswers} out of {questions.length}</p>
+          <progress value={numberOfCorrectAnswers * 100 / questions.length} min="0" max="100" step="1"/>
+          <p>{numberOfCorrectAnswers * 100 / questions.length}%</p>
+        </div>
         <button className='btn-submit' onClick={handleSubmit}>
           {status.isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </div>
     </section>
   )
+}
+
+
+function positionCorrectAnswerIndexRandomly (answers) {
+  let randonIndex // between 0-3
+  while (true){
+    randonIndex = Math.floor(Math.random()*10)
+    if (randonIndex < 4) break
+  }
+  // swap the correct answer to its random position
+  let tmp = answers[0]
+  answers[0] = answers[randonIndex]
+  answers[randonIndex] = tmp
+  return answers
 }
 
 export default Questions
