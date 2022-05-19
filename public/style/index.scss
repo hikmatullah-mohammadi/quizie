@@ -76,11 +76,30 @@ body {
       position: fixed;
       inset: 0 5% auto 5%;
       box-shadow: 0 1px 2px rgb(236, 232, 232);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       h1 {
         padding: 20px;
         &::first-letter {
           font-size: 1.5em;
           color: primary-color(dark-chartreuse);
+        }
+      }
+      .user {
+        padding: 10px;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .avatar {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          overflow: hidden;
+          img {
+            width: 100%;
+          }
         }
       }
     }
