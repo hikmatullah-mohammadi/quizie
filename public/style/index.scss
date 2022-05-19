@@ -64,6 +64,7 @@ $neutral-color : (
 
 body {
   background-color: map-get($map: $neutral-color,$key: light-gainsboro);
+  animation: rainbow-anim 10s linear infinite;
   main {
     padding-top: 80px;
     background-color: white;
@@ -214,7 +215,7 @@ body {
         }
         .rating {
           @include home-elem-style();
-          padding: 40px 0;
+          padding: 90px 0;
           .fa-star {
             color: yellow;
             font-size: 80px;
@@ -392,6 +393,81 @@ body {
     }
   }
 }
+
+@media (min-width: 577px) {
+  body {
+    main {
+      width: 80%;
+      header {
+        inset: 0 10% auto 10%;
+        justify-content: space-around;
+      }
+      .home-logged-in {
+        .records .rating {
+          .fa-star {
+            font-size: 90px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 769px) {
+  body main {
+    width: 70%;
+    header {
+      inset: 0 15% auto 15%;
+      justify-content: space-around;
+      .user {
+        flex-direction: row;
+        .avatar {
+          margin-right: 8px;
+        }
+      }
+    }
+    .home-logged-in {
+      .records {
+        p {
+          padding: 40px;
+        }
+        .rating {
+          .fa-star {
+            font-size: 100px;
+          }
+          span {
+            top: -60px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 981px) {
+  body main {
+    width: 60%;
+    header {
+      inset: 0 20% auto 20%;
+    }
+  }
+}
+@media (min-width: 1025px) {
+  body main {
+    width: 50%;
+    header {
+      inset: 0 25% auto 25%;
+    }
+  }
+}
+@media (min-width: 1300px) {
+  body main {
+    width: 40%;
+    header {
+      inset: 0 30% auto 30%;
+    }
+  }
+}
+
+
 @keyframes opacity-anim {
   from {
     opacity: 0;
@@ -412,5 +488,20 @@ body {
 @keyframes star-anim {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes rainbow-anim {
+  0%{
+    background-color: map-get($map: $neutral-color,$key: light-gainsboro);
+  }
+  25% {
+    background-color: rgb(213, 236, 179);
+  }
+  50% {
+    background-color: rgba(195, 235, 134, 0.877);
+  }
+  75% {
+    background-color: rgba(215, 231, 155, 0.911);
   }
 }

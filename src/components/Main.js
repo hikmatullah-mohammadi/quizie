@@ -9,10 +9,10 @@ const Main = () => {
   return (
     <main>
       <Header />
-      {/* <HomeNotLoggedIn /> */}
+      <HomeNotLoggedIn />
       {/* <HomeLoggedIn /> */}
       {/* <QuizSelection /> */}
-      <Questions />
+      {/* <Questions /> */}
       <Footer />
     </main>
   )

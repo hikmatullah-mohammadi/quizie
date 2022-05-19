@@ -33,6 +33,8 @@
 
 body {
   background-color: #f1efef;
+  -webkit-animation: rainbow-anim 10s linear infinite;
+          animation: rainbow-anim 10s linear infinite;
 }
 
 body main {
@@ -258,7 +260,7 @@ body main .home-logged-in .records .rating {
   background-color: #d1ccee;
   padding: 20px 5%;
   margin-bottom: 10px;
-  padding: 40px 0;
+  padding: 90px 0;
 }
 
 body main .home-logged-in .records .rating .fa-star {
@@ -495,6 +497,76 @@ body main footer p a {
   color: #09ff00;
 }
 
+@media (min-width: 577px) {
+  body main {
+    width: 80%;
+  }
+  body main header {
+    inset: 0 10% auto 10%;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  body main .home-logged-in .records .rating .fa-star {
+    font-size: 90px;
+  }
+}
+
+@media (min-width: 769px) {
+  body main {
+    width: 70%;
+  }
+  body main header {
+    inset: 0 15% auto 15%;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  body main header .user {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  body main header .user .avatar {
+    margin-right: 8px;
+  }
+  body main .home-logged-in .records p {
+    padding: 40px;
+  }
+  body main .home-logged-in .records .rating .fa-star {
+    font-size: 100px;
+  }
+  body main .home-logged-in .records .rating span {
+    top: -60px;
+  }
+}
+
+@media (min-width: 981px) {
+  body main {
+    width: 60%;
+  }
+  body main header {
+    inset: 0 20% auto 20%;
+  }
+}
+
+@media (min-width: 1025px) {
+  body main {
+    width: 50%;
+  }
+  body main header {
+    inset: 0 25% auto 25%;
+  }
+}
+
+@media (min-width: 1300px) {
+  body main {
+    width: 40%;
+  }
+  body main header {
+    inset: 0 30% auto 30%;
+  }
+}
+
 @-webkit-keyframes opacity-anim {
   from {
     opacity: 0;
@@ -548,6 +620,36 @@ body main footer p a {
   to {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rainbow-anim {
+  0% {
+    background-color: #f1efef;
+  }
+  25% {
+    background-color: #d5ecb3;
+  }
+  50% {
+    background-color: rgba(195, 235, 134, 0.877);
+  }
+  75% {
+    background-color: rgba(215, 231, 155, 0.911);
+  }
+}
+
+@keyframes rainbow-anim {
+  0% {
+    background-color: #f1efef;
+  }
+  25% {
+    background-color: #d5ecb3;
+  }
+  50% {
+    background-color: rgba(195, 235, 134, 0.877);
+  }
+  75% {
+    background-color: rgba(215, 231, 155, 0.911);
   }
 }
 /*# sourceMappingURL=index.css.map */
