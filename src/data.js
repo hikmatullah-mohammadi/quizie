@@ -9,16 +9,16 @@ const data = [
     "type": "Multiple Choice",
     "difficulty": "medium"
   },
-  // {
-  //   "category": "Geography",
-  //   "id": "62373f72f34f7d35cc389d6b",
-  //   "correctAnswer": "Armenia",
-  //   "incorrectAnswers": ["Saint Kitts and Nevis", "Moldova", "Mongolia"],
-  //   "question": "Yerevan is the capital city of which country?",
-  //   "tags": [],
-  //   "type": "Multiple Choice",
-  //   "difficulty": "hard"
-  // },
+  {
+    "category": "Geography",
+    "id": "62373f72f34f7d35cc389d6b",
+    "correctAnswer": "Armenia",
+    "incorrectAnswers": ["Saint Kitts and Nevis", "Moldova", "Mongolia"],
+    "question": "Yerevan is the capital city of which country?",
+    "tags": [],
+    "type": "Multiple Choice",
+    "difficulty": "hard"
+  },
   // {
   //   "category": "Film & TV",
   //   "id": "624dba59de6018633d31f6c1",

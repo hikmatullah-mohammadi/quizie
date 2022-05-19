@@ -36,14 +36,23 @@ body {
 }
 
 body main {
+  padding-top: 80px;
   background-color: white;
   width: 90%;
   margin: 20px auto;
   border-radius: 15px;
 }
 
-body main header h1 {
+body main header {
   text-align: center;
+  background-color: white;
+  position: fixed;
+  inset: 0 5% auto 5%;
+  -webkit-box-shadow: 0 1px 2px #ece8e8;
+          box-shadow: 0 1px 2px #ece8e8;
+}
+
+body main header h1 {
   padding: 20px;
 }
 
@@ -116,8 +125,15 @@ body main .home-not-logged-in .welcome-msg {
   text-align: center;
   border: 2px dashed #f83030;
   border-radius: 20px 0 20px 0;
-  background-color: #5beea9;
-  padding: 20px 5px;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+}
+
+body main .home-not-logged-in .welcome-msg h3 {
+  color: black;
+  padding-bottom: 20px;
+  border-bottom: 1px solid red;
   margin-bottom: 10px;
 }
 
@@ -134,8 +150,8 @@ body main .home-not-logged-in .difficulties, body main .home-not-logged-in .cate
   text-align: center;
   border: 2px dashed #f83030;
   border-radius: 20px 0 20px 0;
-  background-color: #5beea9;
-  padding: 20px 5px;
+  background-color: #d1ccee;
+  padding: 20px 5%;
   margin-bottom: 10px;
 }
 
@@ -166,6 +182,7 @@ body main .home-not-logged-in .btn-get-started {
 }
 
 body main .home-logged-in {
+  margin-top: 10px;
   padding: 15px;
 }
 
@@ -173,18 +190,20 @@ body main .home-logged-in h3 {
   text-align: center;
   border: 2px dashed #f83030;
   border-radius: 20px 0 20px 0;
-  background-color: #5beea9;
-  padding: 20px 5px;
+  background-color: #d1ccee;
+  padding: 20px 5%;
   margin-bottom: 10px;
+  padding: 40px;
 }
 
 body main .home-logged-in .records p {
   text-align: center;
   border: 2px dashed #f83030;
   border-radius: 20px 0 20px 0;
-  background-color: #5beea9;
-  padding: 20px 5px;
+  background-color: #d1ccee;
+  padding: 20px 5%;
   margin-bottom: 10px;
+  padding: 40px 0;
   line-height: 25px;
 }
 
@@ -200,10 +219,10 @@ body main .home-logged-in .records .rating {
   text-align: center;
   border: 2px dashed #f83030;
   border-radius: 20px 0 20px 0;
-  background-color: #5beea9;
-  padding: 20px 5px;
+  background-color: #d1ccee;
+  padding: 20px 5%;
   margin-bottom: 10px;
-  padding-bottom: 10px;
+  padding: 40px 0;
 }
 
 body main .home-logged-in .records .rating .fa-star {
@@ -229,15 +248,63 @@ body main .home-logged-in .btn-take-quiz {
   margin-bottom: 20px;
 }
 
+body main .quiz-selection {
+  padding: 15px;
+}
+
+body main .quiz-selection .notice, body main .quiz-selection form {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+  padding: 40px 15px;
+}
+
+body main .quiz-selection .notice p:first-of-type, body main .quiz-selection form p:first-of-type {
+  border-bottom: 2px solid #f83030;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+body main .quiz-selection form {
+  text-align: left;
+}
+
+body main .quiz-selection form label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+body main .quiz-selection form label * {
+  display: block;
+  width: 100%;
+  height: 30px;
+}
+
+body main .quiz-selection form .btn-start-quiz {
+  background-color: #09ff00;
+  color: white;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  margin: 10px 0 0 0;
+}
+
 body main .questions {
   padding: 2%;
 }
 
-body main .questions h2 {
+body main .questions .category {
   text-align: center;
   padding: 15px 0;
   border-bottom: 2px solid #09ff00;
   margin-bottom: 30px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 body main .questions .question .q-number, body main .questions .question .answers li span {
@@ -340,6 +407,17 @@ body main .questions .btn-submit {
   margin-bottom: 20px;
 }
 
+body main .questions .back-to-home, body main .questions .take-another-quiz {
+  background-color: #09ff00;
+  color: white;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
 body main .alert-box {
   position: fixed;
   inset: 0 0 0 0;
@@ -370,6 +448,15 @@ body main .alert-box div hr {
 body main .alert-box div p:last-child {
   text-align: center;
   margin-bottom: 20px;
+}
+
+body main footer p {
+  text-align: center;
+  padding: 20px 0;
+}
+
+body main footer p a {
+  color: #09ff00;
 }
 
 @-webkit-keyframes opacity-anim {

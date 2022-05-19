@@ -148,18 +148,27 @@ const Questions = () => {
       />
       }
       
-      <h2>Python (20q)</h2>
+      <p className="category">Python --{questions.length}q(s)--</p>
       <div>
         { elements }
+
         {/* displayed after submitting */}
         <div className="result" style={{display: status.isSubmitted ? "block" : "none"}}>
           <p>Correct answers: {numberOfCorrectAnswers} out of {questions.length}</p>
           <progress value={numberOfCorrectAnswers * 100 / questions.length || ""} min="0" max="100" step="1"/>
           <p>{numberOfCorrectAnswers * 100 / questions.length}%</p>
         </div>
-        <button className='btn-submit' onClick={handleSubmit}>
-          {status.isSubmitting ? "Submitting..." : "Submit"}
-        </button>
+        
+        {
+          status.isSubmitted ?
+          <>
+            <button className="back-to-home">Home</button>
+            <button className="take-another-quiz">Take another quiz</button>
+          </> :
+          <button className='btn-submit' onClick={handleSubmit}>
+            {status.isSubmitting ? "Submitting..." : "Submit"}
+          </button>
+        }
       </div>
     </section>
   )

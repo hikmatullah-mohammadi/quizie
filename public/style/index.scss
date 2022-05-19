@@ -2,7 +2,7 @@ $primary-color : (
   dark-chartreuse: rgb(9, 255, 0),
   light-chartreuse: rgb(156, 245, 68),
   lightred: rgb(248, 48, 48),
-  home-bg: rgb(91, 238, 169)
+  home-bg: rgb(209, 204, 238)
 );
 
 $neutral-color : (
@@ -31,7 +31,7 @@ $neutral-color : (
   border: 2px dashed primary-color(lightred);
   border-radius: 20px 0 20px 0;
   background-color: primary-color(home-bg);
-  padding: 20px 5px;
+  padding: 20px 5%;
   margin-bottom: 10px;
 }
 
@@ -65,13 +65,18 @@ $neutral-color : (
 body {
   background-color: map-get($map: $neutral-color,$key: light-gainsboro);
   main {
+    padding-top: 80px;
     background-color: white;
     width: 90%;
     margin: 20px auto;
     border-radius: 15px;
     header {
+      text-align: center;
+      background-color: white;
+      position: fixed;
+      inset: 0 5% auto 5%;
+      box-shadow: 0 1px 2px rgb(236, 232, 232);
       h1 {
-        text-align: center;
         padding: 20px;
         &::first-letter {
           font-size: 1.5em;
@@ -133,6 +138,12 @@ body {
       padding: 15px;
       .welcome-msg {
         @include home-elem-style();
+        h3 {
+          color: black;
+          padding-bottom: 20px;
+          border-bottom: 1px solid red;
+          margin-bottom: 10px;
+        }
         .dollor {
           background-color: primary-color(dark-chartreuse);
           background-color: gold;
@@ -163,13 +174,16 @@ body {
       }
     }
     .home-logged-in {
+      margin-top: 10px;
       padding: 15px;
       h3 {
         @include home-elem-style();
+        padding: 40px;
       }
       .records {
         p {
           @include home-elem-style();
+          padding: 40px 0;
           line-height: 25px;
           span {
             background-color: gold;
@@ -181,7 +195,7 @@ body {
         }
         .rating {
           @include home-elem-style();
-          padding-bottom: 10px;
+          padding: 40px 0;
           .fa-star {
             color: yellow;
             font-size: 80px;
@@ -198,13 +212,45 @@ body {
         @include btn-style();
       }
     }
+    
+    .quiz-selection {
+      padding: 15px;
+      .notice {
+        @include home-elem-style();
+        padding: 40px 15px;
+        p:first-of-type {
+          border-bottom: 2px solid primary-color(lightred);
+          padding-bottom: 20px;
+          margin-bottom: 10px;
+        }
+      }
+      form {
+        text-align: left;
+        @extend .notice;
+        label {
+          display: block;
+          margin-bottom: 15px;
+          * {
+            display: block;
+            width: 100%;
+            height: 30px;
+          }
+        }
+        .btn-start-quiz {
+          @include btn-style();
+          margin: 10px 0 0 0;
+        }
+      }
+    }
     .questions {
       padding: 2%;
-      h2 {
+      .category {
         text-align: center;
         padding: 15px 0;
         border-bottom: 2px solid primary-color(dark-chartreuse);
         margin-bottom: 30px;
+        font-size: 25px;
+        font-weight: bold;
       }
       .question {
         .q-number {
@@ -286,6 +332,10 @@ body {
       .btn-submit {
         @include btn-style();
       }
+      .back-to-home, .take-another-quiz {
+        @include btn-style();
+        width: 50%;
+      }
     }
     .alert-box {
       position: fixed;
@@ -309,6 +359,15 @@ body {
         p:last-child {
           text-align: center;
           margin-bottom: 20px;
+        }
+      }
+    }
+    footer {
+      p {
+        text-align: center;
+        padding: 20px 0;
+        a {
+          color: primary-color(dark-chartreuse);
         }
       }
     }
