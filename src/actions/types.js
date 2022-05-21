@@ -1,0 +1,7 @@
+export const questionsFetched = 'questionsFetched'
+export const answerSelected = 'answerSelected'
+export const answersSubmitted = 'answersSubmitted'
+export const signedIn = 'signedIn'
+export const loggedIn = 'loggedIn'
+export const loggedOut = 'loggedOut'
+export const quizStarted = 'quizStarted'

@@ -1,53 +1,28 @@
-import { useEffect, useReducer, useState } from 'react'
-import data from './../data'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AlertBox from './AlertBox'
+import { fetchQuestions, selectAnswer } from '../actions'
+import Result from './Result'
 
-const questionsReducer = (state, action) => {
-  switch(action.type) {
-    case 'qusetionsFetched':
-      return action.payload.data
-    case 'answerSelected':
-      return state.map(item => item.id === action.payload.id ?
-        {...item, selectedAnswer: action.payload.option} : item)
-    default:
-      return state
-  }
-}
 
 const Questions = () => {
-  const [questions, answerDispatch] = useReducer(questionsReducer, [])
+  const dispatch = useDispatch()
+  const questions = useSelector(state => state.quizReducer.questions)
+  
   const [status, setStatus] = useState({
     isSubmitting: false,
     isSubmitted: false
   })
+  
   const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0)
   const [displayAlertBox, setDisplayAlertBox] = useState(false)
-
+  
   useEffect(() => {
-    // put correct answer and incorrect answers together in an array
-    const questions = data.map(q => ({
-      ...q,
-      answers: [q.correctAnswer, ...q.incorrectAnswers]
-    }))
-
-    // position the correct answer its (random) index
-    const questionsWithRandomCorrectAnsIndex = questions.map(q => ({
-      ...q,
-      answers: positionCorrectAnswerIndexRandomly(q.answers)
-    }))
-    answerDispatch({
-      type: 'qusetionsFetched',
-      payload: {
-        data: questionsWithRandomCorrectAnsIndex
-      }
-    })
+    dispatch(fetchQuestions())
   }, [])
 
   const handleSelectAnswer = (id, option) => {
-    answerDispatch({
-      type: 'answerSelected',
-      payload: {id, option}
-    })
+    dispatch(selectAnswer(id, option))
   }
   
   const handleSubmit = () => {
@@ -153,18 +128,11 @@ const Questions = () => {
         { elements }
 
         {/* displayed after submitting */}
-        <div className="result" style={{display: status.isSubmitted ? "block" : "none"}}>
-          <p>Correct answers: {numberOfCorrectAnswers} out of {questions.length}</p>
-          <progress value={numberOfCorrectAnswers * 100 / questions.length || ""} min="0" max="100" step="1"/>
-          <p>{numberOfCorrectAnswers * 100 / questions.length}%</p>
-        </div>
-        
         {
-          status.isSubmitted ?
-          <>
-            <button className="back-to-home">Home</button>
-            <button className="take-another-quiz">Take another quiz</button>
-          </> :
+          status.isSubmitted && <Result questions={questions} numberOfCorrectAnswers={numberOfCorrectAnswers}/>
+        }
+        {
+          !status.isSubmitted &&
           <button className='btn-submit' onClick={handleSubmit}>
             {status.isSubmitting ? "Submitting..." : "Submit"}
           </button>
@@ -172,20 +140,6 @@ const Questions = () => {
       </div>
     </section>
   )
-}
-
-
-function positionCorrectAnswerIndexRandomly (answers) {
-  let randonIndex // between 0-3
-  while (true){
-    randonIndex = Math.floor(Math.random()*10)
-    if (randonIndex < 4) break
-  }
-  // swap the correct answer to its random position
-  let tmp = answers[0]
-  answers[0] = answers[randonIndex]
-  answers[randonIndex] = tmp
-  return answers
 }
 
 export default Questions

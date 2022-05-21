@@ -549,7 +549,7 @@ body main footer p a {
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1281px) {
   body main {
     width: 50%;
   }
@@ -558,7 +558,7 @@ body main footer p a {
   }
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1401px) {
   body main {
     width: 40%;
   }
