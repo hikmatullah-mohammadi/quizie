@@ -35,6 +35,12 @@ $neutral-color : (
   margin-bottom: 10px;
 }
 
+@mixin main-elmnts-anim {
+  animation:
+    main-elements-anim 1s linear,
+    opacity-anim 1s linear;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -81,6 +87,7 @@ body {
       flex-direction: row;
       justify-content: space-between;
       h1 {
+        cursor: pointer;
         padding: 20px;
         &::first-letter {
           font-size: 1.5em;
@@ -94,6 +101,7 @@ body {
         flex-direction: column;
         align-items: center;
         .avatar {
+          cursor: pointer;
           width: 32px;
           height: 32px;
           border-radius: 50%;
@@ -155,6 +163,7 @@ body {
     }
 
     .home-not-logged-in {
+      @include main-elmnts-anim();
       padding: 15px;
       .welcome-msg {
         @include home-elem-style();
@@ -194,6 +203,7 @@ body {
       }
     }
     .home-logged-in {
+      @include main-elmnts-anim();
       margin-top: 10px;
       padding: 15px;
       h3 {
@@ -234,6 +244,7 @@ body {
     }
     
     .quiz-selection {
+      @include main-elmnts-anim();
       padding: 15px;
       .notice {
         @include home-elem-style();
@@ -263,6 +274,7 @@ body {
       }
     }
     .questions {
+      @include main-elmnts-anim();
       padding: 2%;
       .category {
         text-align: center;
@@ -336,25 +348,29 @@ body {
         }
       }
       .result {
-        margin: 20px 0;
-        padding: 20px;
-        text-align: center;
-        background-color: primary-color(dark-chartreuse);
-        border-radius: 10px;
-        font-weight: bold;
-        animation: opacity-anim 1s ease-in;
-        progress {
+        div:first-child {
+          margin: 20px 0;
+          padding: 20px;
+          text-align: center;
+          background-color: primary-color(dark-chartreuse);
+          border-radius: 10px;
+          font-weight: bold;
           animation: opacity-anim 1s ease-in;
-          width: 100%;
-          height: 20px;
+          progress {
+            animation: opacity-anim 1s ease-in;
+            width: 100%;
+            height: 20px;
+          }
+        }
+        div {
+          .back-to-home, .take-another-quiz {
+            @include btn-style();
+            width: 50%;
+          }
         }
       }
       .btn-submit {
         @include btn-style();
-      }
-      .back-to-home, .take-another-quiz {
-        @include btn-style();
-        width: 50%;
       }
     }
     .alert-box {
@@ -385,7 +401,7 @@ body {
     footer {
       p {
         text-align: center;
-        padding: 20px 0;
+         padding: 20px 0;
         a {
           color: primary-color(dark-chartreuse);
         }
@@ -400,7 +416,6 @@ body {
       width: 80%;
       header {
         inset: 0 10% auto 10%;
-        justify-content: space-around;
       }
       .home-logged-in {
         .records .rating {
@@ -417,7 +432,6 @@ body {
     width: 70%;
     header {
       inset: 0 15% auto 15%;
-      justify-content: space-around;
       .user {
         flex-direction: row;
         .avatar {
@@ -469,26 +483,18 @@ body {
 
 
 @keyframes opacity-anim {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0 }
+  to { opacity: 1 }
 }
 @keyframes rotate-anim {
-  from {
-    transform: rotate(0deg);
-  }
+  from { transform: rotate(0deg) }
   to {
     transform: rotate(360deg);
     background-color: blue;
   }
 }
 @keyframes star-anim {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg) }
 }
 
 @keyframes rainbow-anim {
@@ -504,4 +510,9 @@ body {
   75% {
     background-color: rgba(215, 231, 155, 0.911);
   }
+}
+@keyframes main-elements-anim {
+  40% { transform: rotate(1deg) }
+  80% { transform: rotate(-1deg) }
+  to { transform: rotate(0deg) }
 }

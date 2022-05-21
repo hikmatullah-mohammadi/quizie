@@ -1,4 +1,30 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { startQuiz } from "../actions";
+
 const QuizSelection = () => {
+  const dispatch = useDispatch()
+  const [state, setState] = useState({
+    numberOfQuestions: '',
+    difficulty: '',
+    category: ''
+  })
+
+  const handleSelect = e => {
+    const {name, value} = e.target
+    setState(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+  const handleSubmit = e => {
+    dispatch(startQuiz(state))
+    setState({
+      numberOfQuestions: '',
+      difficulty: '',
+      category: ''
+    })
+  }
   return (
     <div className="quiz-selection">
       <div className="notice">
@@ -10,15 +36,15 @@ const QuizSelection = () => {
           dolorem id error voluptatibus nemo
         </p>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <p>
           <b>Choose your favorite quiz here</b>
         </p>
         <label>
           Select Gategory
-          <select name="category" required defaultValue="">
+          <select name="category" required value={state.category} onChange={handleSelect}>
             <option value="" disabled>
-              Select gategory ---
+              Select category ---
             </option>
             <option value="artsAndLiterature">Arts & Literature</option>
             <option value="filmAndTV">Film & TV</option>
@@ -34,7 +60,7 @@ const QuizSelection = () => {
         </label>
         <label>
           Select Difficulty
-          <select name="difficulty" required defaultValue="">
+          <select name="difficulty" required value={state.difficulty} onChange={handleSelect}>
             <option value="" disabled>
               Select difficulty ---
             </option>
@@ -45,9 +71,23 @@ const QuizSelection = () => {
         </label>
         <label>
           Number of Questions
-          <input type="number" placeholder="0-10" min="1" max="10" required name="numberOfQuestions"/>
+          <select value={state.numberOfQuestions} required name="numberOfQuestions" onChange={handleSelect}>
+            <option value="" disabled>
+              Select number of questions --
+            </option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
         </label>
-        <button type="submit" className="btn-start-quiz">
+        <button type="submit" className="btn-start-quiz" >
           Start
         </button>
       </form>

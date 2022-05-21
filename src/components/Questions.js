@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AlertBox from './AlertBox'
-import { fetchQuestions, selectAnswer } from '../actions'
+import { selectAnswer, submitAnswers } from '../actions'
 import Result from './Result'
-
+import { isAllQuestionsAnswered } from './../utils'
 
 const Questions = () => {
   const dispatch = useDispatch()
   const questions = useSelector(state => state.quizReducer.questions)
-  
+
   const [status, setStatus] = useState({
     isSubmitting: false,
     isSubmitted: false
@@ -18,38 +18,35 @@ const Questions = () => {
   const [displayAlertBox, setDisplayAlertBox] = useState(false)
   
   useEffect(() => {
-    dispatch(fetchQuestions())
-  }, [])
+    setStatus({isSubmitted: false, isSubmitting: false})
+  }, [dispatch])
 
   const handleSelectAnswer = (id, option) => {
+    !status.isSubmitted && !status.isSubmitting && 
     dispatch(selectAnswer(id, option))
   }
   
   const handleSubmit = () => {
-    let isAllQuestionsAnswered = true
-    questions.forEach(item => {
-      if (!item.selectedAnswer){        
-        isAllQuestionsAnswered = false
-        setDisplayAlertBox(true)
-        setTimeout(() => {
-          setDisplayAlertBox(false)
-        }, 2000);
-        return
-      }
-    })
-    if (!isAllQuestionsAnswered) {
+    if (!isAllQuestionsAnswered(questions)) {
+      setDisplayAlertBox(true)
+      setTimeout(() => {
+        setDisplayAlertBox(false)
+      }, 2000);
       return
     }
+    
     setStatus({...status, isSubmitting: true})
     let nCorrectAnswers = 0
     questions.forEach(q => {
-      if (q.answers.indexOf(q.correctAnswer) === q.selectedAnswer-1) {
-        nCorrectAnswers++
-      }
+      if (q.answers.indexOf(q.correctAnswer) === q.selectedAnswer-1) nCorrectAnswers++
     });
-    
     setNumberOfCorrectAnswers(nCorrectAnswers)
-    setStatus({isSubmitting: false, isSubmitted: true})
+  
+    setTimeout(() => {
+      dispatch(submitAnswers({ numberOfCorrectAnswers: nCorrectAnswers }))
+      setStatus({isSubmitting: false, isSubmitted: true})
+    }, 2000);
+
   }
   const elements = questions.map((item, index) => (
     <div className='question' key={item.id}>
@@ -58,7 +55,7 @@ const Questions = () => {
         {item.question}
       </p>
       <ul className="answers">
-        <li 
+        <li
           onClick={() => handleSelectAnswer(item.id, '1')}
           className={
             !status.isSubmitted ? "" : (
@@ -113,6 +110,7 @@ const Questions = () => {
       </ul>
     </div>
   ))
+
   return (
     <section className='questions'>
       {/* display when not all questions are answered */}
@@ -123,20 +121,18 @@ const Questions = () => {
       />
       }
       
-      <p className="category">Python --{questions.length}q(s)--</p>
+      <p className="category">{questions[0]?.category} --{questions.length}q(s)--</p>
       <div>
         { elements }
-
-        {/* displayed after submitting */}
-        {
-          status.isSubmitted && <Result questions={questions} numberOfCorrectAnswers={numberOfCorrectAnswers}/>
-        }
         {
           !status.isSubmitted &&
           <button className='btn-submit' onClick={handleSubmit}>
             {status.isSubmitting ? "Submitting..." : "Submit"}
           </button>
         }
+
+        {/* displayed after submitting */}
+        { status.isSubmitted && <Result questions={questions} numberOfCorrectAnswers={numberOfCorrectAnswers}/> }
       </div>
     </section>
   )

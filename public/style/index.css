@@ -65,6 +65,7 @@ body main header {
 }
 
 body main header h1 {
+  cursor: pointer;
   padding: 20px;
 }
 
@@ -89,6 +90,7 @@ body main header .user {
 }
 
 body main header .user .avatar {
+  cursor: pointer;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -156,6 +158,8 @@ body main .signup-page .alternative-signup button {
 }
 
 body main .home-not-logged-in {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
   padding: 15px;
 }
 
@@ -220,6 +224,8 @@ body main .home-not-logged-in .btn-get-started {
 }
 
 body main .home-logged-in {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
   margin-top: 10px;
   padding: 15px;
 }
@@ -287,6 +293,8 @@ body main .home-logged-in .btn-take-quiz {
 }
 
 body main .quiz-selection {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
   padding: 15px;
 }
 
@@ -333,6 +341,8 @@ body main .quiz-selection form .btn-start-quiz {
 }
 
 body main .questions {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
   padding: 2%;
 }
 
@@ -417,7 +427,7 @@ body main .questions .question .answers .wrong-answer span {
           box-shadow: 1px 1px #09ff00;
 }
 
-body main .questions .result {
+body main .questions .result div:first-child {
   margin: 20px 0;
   padding: 20px;
   text-align: center;
@@ -428,11 +438,22 @@ body main .questions .result {
           animation: opacity-anim 1s ease-in;
 }
 
-body main .questions .result progress {
+body main .questions .result div:first-child progress {
   -webkit-animation: opacity-anim 1s ease-in;
           animation: opacity-anim 1s ease-in;
   width: 100%;
   height: 20px;
+}
+
+body main .questions .result div .back-to-home, body main .questions .result div .take-another-quiz {
+  background-color: #09ff00;
+  color: white;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  width: 50%;
 }
 
 body main .questions .btn-submit {
@@ -443,17 +464,6 @@ body main .questions .btn-submit {
   width: 100%;
   height: 35px;
   margin-bottom: 20px;
-}
-
-body main .questions .back-to-home, body main .questions .take-another-quiz {
-  background-color: #09ff00;
-  color: white;
-  border-radius: 5px;
-  font-weight: 900;
-  width: 100%;
-  height: 35px;
-  margin-bottom: 20px;
-  width: 50%;
 }
 
 body main .alert-box {
@@ -503,8 +513,6 @@ body main footer p a {
   }
   body main header {
     inset: 0 10% auto 10%;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
   }
   body main .home-logged-in .records .rating .fa-star {
     font-size: 90px;
@@ -517,8 +525,6 @@ body main footer p a {
   }
   body main header {
     inset: 0 15% auto 15%;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
   }
   body main header .user {
     -webkit-box-orient: horizontal;
@@ -650,6 +656,36 @@ body main footer p a {
   }
   75% {
     background-color: rgba(215, 231, 155, 0.911);
+  }
+}
+
+@-webkit-keyframes main-elements-anim {
+  40% {
+    -webkit-transform: rotate(1deg);
+            transform: rotate(1deg);
+  }
+  80% {
+    -webkit-transform: rotate(-1deg);
+            transform: rotate(-1deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@keyframes main-elements-anim {
+  40% {
+    -webkit-transform: rotate(1deg);
+            transform: rotate(1deg);
+  }
+  80% {
+    -webkit-transform: rotate(-1deg);
+            transform: rotate(-1deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
 }
 /*# sourceMappingURL=index.css.map */
