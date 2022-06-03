@@ -26,7 +26,7 @@ export default createReducer(initialState, {
     state.controls.currentPage = "questions"
     state.userData.totalNumberOfQuestions += action.payload.questions.length
     state.userData.numberOfQuizes += 1
-    !state.userData.categories.includes(action.payload.category.capi) &&
+    !state.userData.categories.includes(action.payload.category) &&
       state.userData.categories.push(action.payload.category)
   },
   [actionTypes.answersSubmitted]: (state, action) => {
