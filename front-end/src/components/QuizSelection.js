@@ -17,8 +17,9 @@ const QuizSelection = () => {
       [name]: value
     }))
   }
-  const handleSubmit = e => {
-    dispatch(startQuiz(state))
+  const handleSubmit = async e => {
+    e.preventDefault()
+    await dispatch(startQuiz(state))
     setState({
       numberOfQuestions: '',
       difficulty: '',
@@ -36,7 +37,7 @@ const QuizSelection = () => {
           dolorem id error voluptatibus nemo
         </p>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="">
         <p>
           <b>Choose your favorite quiz here</b>
         </p>

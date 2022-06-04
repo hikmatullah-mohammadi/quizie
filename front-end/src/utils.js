@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export const positionCorrectAnswerIndexRandomly = answers => {
   let randonIndex // between 0-3
   while (true){
@@ -18,4 +20,9 @@ export const isAllQuestionsAnswered = questions => {
     }
   }
   return true
+}
+
+export const getQuestions = ({numberOfQuestions, category, difficulty}) => {
+  const url = `https://the-trivia-api.com/api/questions?categories=${category}&limit=${numberOfQuestions}&difficulty=${difficulty}`
+  return axios(url)
 }
