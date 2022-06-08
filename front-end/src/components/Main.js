@@ -5,13 +5,16 @@ import HomeLoggedIn from './HomeLoggedIn'
 import QuizSelection from './QuizSelection'
 import Footer from './Footer'
 import { useSelector } from 'react-redux'
+import LoadingDisplay from './LoadingDisplay'
 
 const Main = () => {
   const currentPage = useSelector(state => state.quizReducer.controls.currentPage)
+  const isWaiting = useSelector(state => state.quizReducer.controls.isWaiting)
   return (
     <main>
+      { isWaiting && <LoadingDisplay />}
       <Header />
-      {/* <HomeNotLoggedIn /> */}
+      { currentPage === "homeNotLoggedIn" && <HomeNotLoggedIn /> }
       { currentPage === "homeLoggedIn" && <HomeLoggedIn /> }
       { currentPage === "quizSelection" && <QuizSelection /> }
       { currentPage === "questions" && <Questions /> }

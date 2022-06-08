@@ -1,4 +1,8 @@
+import { useDispatch } from "react-redux"
+import { login, setIsWaiting } from "../actions"
+
 const HomeNotLoggedIn = () => {
+  const dispatch = useDispatch()
   return (
     <div className="home-not-logged-in">
       <div className="welcome-msg">
@@ -32,7 +36,14 @@ const HomeNotLoggedIn = () => {
           </ul>
         </div>
       </div>
-      <button className="btn-get-started">Get Started</button>
+      <button
+        className="btn-get-started"
+        onClick={async () => {
+          dispatch(setIsWaiting(true))
+          await dispatch(login())
+          dispatch(setIsWaiting(false))
+        }}
+        >Get Started</button>
     </div>
   )
 }

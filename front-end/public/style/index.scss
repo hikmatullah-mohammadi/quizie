@@ -54,16 +54,23 @@ $neutral-color : (
   inset: 0 0;
   display: grid;
   place-items: center;
+  z-index: 2;
   div {
-    width: 100%;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
     p {
-      text-align: center;
-      color: white;
+      clear: both;
+      color: primary-color(dark-chartreuse);
     }
-    hr {
-      float: left;
-      width: 5%;
-      animation: linear 3s rotate-anim infinite;
+    div {
+      display: flex;
+      justify-content: center;
+      hr {
+        float: left;
+        width: 10px;
+        animation: linear 3s rotate-anim infinite;
+      }
     }
   }
 }
@@ -241,6 +248,10 @@ body {
       .btn-take-quiz {
         @include btn-style();
       }
+      .btn-logout {
+        @include btn-style();
+        background-color: primary-color(lightred);
+      }
     }
     
     .quiz-selection {
@@ -248,6 +259,7 @@ body {
       padding: 15px;
       .notice {
         @include home-elem-style();
+        text-align: left;
         padding: 40px 15px;
         p:first-of-type {
           border-bottom: 2px solid primary-color(lightred);

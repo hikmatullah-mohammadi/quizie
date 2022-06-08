@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { startQuiz } from "../actions";
+import { setIsWaiting, startQuiz } from "../actions";
 
 const QuizSelection = () => {
   const dispatch = useDispatch()
@@ -19,7 +19,9 @@ const QuizSelection = () => {
   }
   const handleSubmit = async e => {
     e.preventDefault()
+    dispatch(setIsWaiting(true))
     await dispatch(startQuiz(state))
+    dispatch(setIsWaiting(false))
     setState({
       numberOfQuestions: '',
       difficulty: '',
@@ -31,10 +33,11 @@ const QuizSelection = () => {
       <div className="notice">
         <p><b>Please consider the following tips before you start</b></p>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-          repellat repudiandae saepe eligendi! Vitae illo unde, placeat rerum
-          veritatis alias eum necessitatibus totam eos ullam facere facilis
-          dolorem id error voluptatibus nemo
+          <b style={{color: 'red'}} >-*</b> You have 1 minute for every question. (10 minutes for 10 questions in total)<br />
+          <b style={{color: 'red'}}>-*</b> Once you start, it will effect your rating wether of not you submit your answer; so please
+          make sure NOT to quit before you submit the answer. <br />
+          <b style={{color: 'red'}}>-*</b> You can take as many quizes as you desire.<br />
+          <span style={{display: 'block', textAlign: "center", marginTop:"20px"}}><b>Happy Assessment :)</b></span>
         </p>
       </div>
       <form onSubmit={handleSubmit} method="">

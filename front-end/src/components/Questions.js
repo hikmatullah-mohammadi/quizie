@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AlertBox from './AlertBox'
-import { selectAnswer, submitAnswers } from '../actions'
+import { selectAnswer, setIsWaiting, submitAnswers } from '../actions'
 import Result from './Result'
 import { isAllQuestionsAnswered } from './../utils'
 
@@ -42,10 +42,12 @@ const Questions = () => {
     });
     setNumberOfCorrectAnswers(nCorrectAnswers)
   
-    setTimeout(() => {
-      dispatch(submitAnswers({ numberOfCorrectAnswers: nCorrectAnswers }))
+    dispatch(setIsWaiting(true))
+    setTimeout(async () => {
+      await dispatch(submitAnswers({ numberOfCorrectAnswers: nCorrectAnswers }))
+      dispatch(setIsWaiting(false))
       setStatus({isSubmitting: false, isSubmitted: true})
-    }, 2000);
+    }, 1000);
 
   }
   const elements = questions.map((item, index) => (
