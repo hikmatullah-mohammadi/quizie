@@ -3,9 +3,10 @@ import * as actionTypes from './../actions/types'
 import { getQuestions, positionCorrectAnswerIndexRandomly } from './../utils'
 import QuizDataServices from './../services/quiz'
 import data from './../data'
+import store from './../store'
 
 export const login = createAsyncThunk(actionTypes.loggedIn, async () => {
-  const userData = await QuizDataServices.getUserData({username: 'hikmatullah_m80', password: '1234'})
+  const userData = await QuizDataServices.getUserData({username: 'hussain_', password: '1234'})
   return {
     userData: userData.data
   }
@@ -28,14 +29,16 @@ export const startQuiz = createAsyncThunk(actionTypes.quizStarted,  async quizSp
     ...q,
     answers: positionCorrectAnswerIndexRandomly(q.answers)
   }))
-
-  const dataArg = {
-    username: 'hikmatullah_m80',
-    password: '1234',
+  const {username, password} = store.getState().quizReducer.userData
+  
+  const argToPass = {
+    username,
+    password,
     numberOfQuestions: quizSpecs.numberOfQuestions,
     category: quizSpecs.category
   }
-  await QuizDataServices.startQuiz(dataArg)
+
+  await QuizDataServices.startQuiz(argToPass)
   return {
     questions: questionsWithRandomCorrectAnsIndex,
     category: quizSpecs.category
@@ -48,12 +51,14 @@ export const selectAnswer = createAction(actionTypes.answerSelected, (id, option
 
 export const openHomeLoggedIn = createAction(actionTypes.HomeLoggedInOpened)
 export const submitAnswers = createAsyncThunk(actionTypes.answersSubmitted, async ({numberOfCorrectAnswers}) => {
-  const dataArg = {
-    username: 'hikmatullah_m80',
-    password: '1234',
+  const {username, password} = store.getState().quizReducer.userData
+  
+  const argToPass = {
+    username,
+    password,
     numberOfCorrectAnswers
   }
-  const response = await QuizDataServices.submitAnswers(dataArg)
+  const response = await QuizDataServices.submitAnswers(argToPass)
   return { numberOfCorrectAnswers }
 })
 

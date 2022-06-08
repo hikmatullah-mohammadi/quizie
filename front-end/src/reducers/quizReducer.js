@@ -6,6 +6,7 @@ const initialState = {
 
   userData: {
     username: '',
+    password: '',
     avatar: '',
     numberOfQuizes: 0,
     totalNumberOfQuestions: 0,
@@ -19,9 +20,8 @@ const initialState = {
 }
 export default createReducer(initialState, {
   [actionTypes.loggedIn+'/fulfilled']: (state, action) => {
-    const {username, numberOfQuizes, totalQuestionsAnsweredCorrectly, totalNumberOfQuestions, categories, avatar} = action.payload.userData
     state.controls.currentPage = "homeLoggedIn"
-    state.userData = {username, numberOfQuizes, totalQuestionsAnsweredCorrectly, totalNumberOfQuestions, categories, avatar}
+    state.userData = { ...action.payload.userData }
   },
   [actionTypes.answerSelected]: (state, action) => {
     const index = state.questions.findIndex(item => item.id === action.payload.id)
@@ -46,8 +46,5 @@ export default createReducer(initialState, {
   },
   [actionTypes.isWaitingSet]: (state, action) => {
     state.controls.isWaiting = action.payload.status
-    console.log(action)
-    console.log("action")
-
   }
 })

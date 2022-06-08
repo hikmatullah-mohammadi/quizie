@@ -35,7 +35,6 @@ export default class usersDAO {
       console.error(err);
       return
     }
-
     return response
   }
   

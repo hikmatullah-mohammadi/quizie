@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { openQuizSelectionPage, setIsWaiting } from "../actions";
+import { logout, openQuizSelectionPage, setIsWaiting } from "../actions";
 
 const HomeLoggedIn = () => {
   const dispatch = useDispatch();
