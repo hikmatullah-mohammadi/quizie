@@ -40,6 +40,7 @@ const HomeLoggedIn = () => {
       </button>
       <button
         className="btn-logout"
+        onClick={() => dispatch(logout())}
       >
         Logout
       </button>

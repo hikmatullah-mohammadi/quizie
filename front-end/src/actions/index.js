@@ -11,6 +11,7 @@ export const login = createAsyncThunk(actionTypes.loggedIn, async () => {
     userData: userData.data
   }
 })
+export const logout = createAction(actionTypes.loggedOut)
 
 export const openQuizSelectionPage = createAction(actionTypes.quizSelectionPageOpened)
 export const startQuiz = createAsyncThunk(actionTypes.quizStarted,  async quizSpecs => {

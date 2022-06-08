@@ -46,5 +46,9 @@ export default createReducer(initialState, {
   },
   [actionTypes.isWaitingSet]: (state, action) => {
     state.controls.isWaiting = action.payload.status
+  },
+  [actionTypes.loggedOut]: (state, action) => {
+    state.userData = {}
+    state.controls.currentPage = 'homeNotLoggedIn'
   }
 })
