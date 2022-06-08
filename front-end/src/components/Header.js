@@ -10,6 +10,7 @@ const Header = () => {
     <header style={{justifyContent: currentPage !== 'homeNotLoggedIn' ? "space-between" : "space-around"}} >
       <h1
         onClick={() => {
+          if (currentPage === 'homeNotLoggedIn') return
           if (currentPage === 'questions') {
             const flag = window.confirm("Do you want to exit the quiz?")
             if (!flag) return
