@@ -8,7 +8,7 @@ export default class UsersController {
       res.json(user)
       return
     }
-    res.send({error: 'Failed! Try again.'})
+    res.send({error: 'Failed! Try again with a different username and password.'})
   }
   static async apiStartQuiz(req, res, next) {
     const { username, password, quizSpecs } = req.body

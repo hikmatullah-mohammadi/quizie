@@ -13,9 +13,10 @@ export default class usersDAO {
 
   static async getUserData({username, password}) {
     const query = {$and: [{username: {$eq: username}}, {password: {$eq: password}}]}
-    const projection = { _id: 0, lastQuestionsList: 0}
     try {
-      const user = await users.findOne(query, projection)
+      const user = await users.findOne(query)
+      delete user._id
+      delete user.lastQuestionsList
       return user
     } catch(err) {
       console.error(err)
@@ -63,18 +64,19 @@ export default class usersDAO {
   
   static async submitAnswers({username, password, answers }) {
     const query = { $and: [{username: {$eq: username}}, {password: {$eq: password}}]}
-    try {
-      const { totalQuestionsAnsweredCorrectly: nOfCA } = await users.findOne(query)
-      const {lastQuestionsList} = await users.findOne(query)
-      const numberOfCorrectAnswers = countTheNumberOfCorrectAnswers(lastQuestionsList, answers)
-      const response = await users.updateOne(query, {$set: {totalQuestionsAnsweredCorrectly: nOfCA + numberOfCorrectAnswers}})
-      if (response.modifiedCount > 0 || numberOfCorrectAnswers === 0){
-        return numberOfCorrectAnswers
+    const { totalQuestionsAnsweredCorrectly: nOfCA } = await users.findOne(query)
+    const {lastQuestionsList} = await users.findOne(query)
+    const numberOfCorrectAnswers = countTheNumberOfCorrectAnswers(lastQuestionsList, answers)
+    const newValues = {$set:
+      {
+        totalQuestionsAnsweredCorrectly: nOfCA + numberOfCorrectAnswers,
+        lastQuestionsList: []
       }
-      return
-    } catch(err) {
-      console.error(err)
-      return
     }
+    const response = await users.updateOne(query, newValues)
+    if (response.modifiedCount > 0){
+      return numberOfCorrectAnswers
+    }
+    return
   }
 }
