@@ -15,7 +15,8 @@ const initialState = {
   },
   controls: {
     currentPage: "homeNotLoggedIn",
-    isWaiting: false
+    isWaiting: false,
+    currentNumberOfCorrectAnswers: 0
   }
 }
 export default createReducer(initialState, {
@@ -40,6 +41,7 @@ export default createReducer(initialState, {
   },
   [actionTypes.answersSubmitted+"/fulfilled"]: (state, action) => {
     state.userData.totalQuestionsAnsweredCorrectly += action.payload.numberOfCorrectAnswers
+    state.controls.currentNumberOfCorrectAnswers = action.payload.numberOfCorrectAnswers
   },
   [actionTypes.HomeLoggedInOpened]: (state, action) => {
     state.controls.currentPage = "homeLoggedIn"

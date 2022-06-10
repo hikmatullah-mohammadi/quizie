@@ -14,7 +14,6 @@ const Questions = () => {
     isSubmitted: false
   })
   
-  const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0)
   const [displayAlertBox, setDisplayAlertBox] = useState(false)
   
   useEffect(() => {
@@ -36,15 +35,11 @@ const Questions = () => {
     }
     
     setStatus({...status, isSubmitting: true})
-    let nCorrectAnswers = 0
-    questions.forEach(q => {
-      if (q.answers.indexOf(q.correctAnswer) === q.selectedAnswer-1) nCorrectAnswers++
-    });
-    setNumberOfCorrectAnswers(nCorrectAnswers)
-  
+    
+    const answers = questions.map(item => item.selectedAnswer)
     dispatch(setIsWaiting(true))
     setTimeout(async () => {
-      await dispatch(submitAnswers({ numberOfCorrectAnswers: nCorrectAnswers }))
+      await dispatch(submitAnswers(answers))
       dispatch(setIsWaiting(false))
       setStatus({isSubmitting: false, isSubmitted: true})
     }, 1000);
@@ -69,7 +64,7 @@ const Questions = () => {
         >
           <span className={item.selectedAnswer === '1' ? 'selected-answer' : ''}>1</span>
           {" "}{item.answers[0]}
-          </li>
+        </li>
         <li
           onClick={() => handleSelectAnswer(item.id, '2')}
           className={
@@ -134,7 +129,7 @@ const Questions = () => {
         }
 
         {/* displayed after submitting */}
-        { status.isSubmitted && <Result questions={questions} numberOfCorrectAnswers={numberOfCorrectAnswers}/> }
+        { status.isSubmitted && <Result numberOfQuestions={questions.length} /> }
       </div>
     </section>
   )

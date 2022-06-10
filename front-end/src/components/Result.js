@@ -1,14 +1,16 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { openHomeLoggedIn, openQuizSelectionPage } from "./../actions"
 
 const Result = props => {
   const dispatch = useDispatch()
+  const currentNumberOfCorrectAnswers = useSelector(state => state.quizReducer.controls.currentNumberOfCorrectAnswers)
+  console.log(currentNumberOfCorrectAnswers)
   return (
     <div className="result">
       <div>
-        <p>Correct answers: {props.numberOfCorrectAnswers} out of {props.questions.length}</p>
-        <progress value={props.numberOfCorrectAnswers * 100 / props.questions.length || ""} min="0" max="100" step="1"/>
-        <p>{(props.numberOfCorrectAnswers * 100 / props.questions.length).toFixed(2)}%</p>
+        <p>Correct answers: {currentNumberOfCorrectAnswers} out of {props.numberOfQuestions}</p>
+        <progress value={currentNumberOfCorrectAnswers * 100 / props.numberOfQuestions || ""} min="0" max="100" step="1"/>
+        <p>{(currentNumberOfCorrectAnswers * 100 / props.numberOfQuestions).toFixed(2)}%</p>
       </div>
       <div>
         <button 

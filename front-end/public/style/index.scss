@@ -47,6 +47,9 @@ $neutral-color : (
   box-sizing: border-box;
   font-family: Kubic;
 }
+button:hover {
+  cursor: pointer;
+}
 
 .loading-display {
   background-color: rgba(0, 0, 0, 0.753);

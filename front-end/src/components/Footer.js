@@ -2,7 +2,8 @@ const Footer = () => (
   <footer>
     <hr />
     <p>
-      Developed by <a href="https://hikmatullah-mohammadi.netlify.app/">Hikmatullah Mohammadi</a>
+      Developed by <a href="https://hikmatullah-mohammadi.netlify.app/">Hikmatullah Mohammadi.</a>
+      <br />&copy; Copyright 2022.
     </p>
   </footer>
 )
