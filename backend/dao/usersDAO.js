@@ -17,7 +17,6 @@ export default class usersDAO {
     const query = {_id: {$eq: decrypted_user_id}}
     const defaultDoc = {
       numberOfQuizes: 0,
-      numberOfQuestions: 0,
       totalNumberOfQuestions: 0,
       totalQuestionsAnsweredCorrectly: 0,
       categories: [],
