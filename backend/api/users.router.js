@@ -3,7 +3,7 @@ import UsersController from './users.controller.js'
 
 const router = express.Router()
 
-router.route('/user').post(UsersController.apiGetUserData)
+router.route('/user').post(UsersController.apiSignupOrLogin)
 router.route('/start-quiz').post(UsersController.apiStartQuiz)
 router.route('/submit-answers').post(UsersController.apiSubmitAnswer)
 

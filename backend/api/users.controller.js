@@ -2,14 +2,22 @@ import usersDAO from "../dao/usersDAO.js";
 import EntryValidations from './../entryValidations.js'
 
 export default class UsersController {
-  static async apiGetUserData (req, res, next) {
-    const {username, password} = req.body
-    const user = await usersDAO.getUserData({username, password})
+  static async apiSignupOrLogin (req, res, next) {
+    const {user_id, user_signature, username} = req.body
+
+    // validate !!!!
+    const validate = EntryValidations.validateUserIdAndSignature(user_id, user_signature)
+    if (validate.status === 'invalid') {
+      res.json({error: "Invalid user!"})
+      return
+    }
+
+    const user = await usersDAO.signupOrLogin({ user_id, username})
     if (user){
       res.json(user)
       return
     }
-    res.send({error: 'Failed! Try again with a different username and password.'})
+    res.send({error: 'Failed! You are not authenticated.'})
   }
   static async apiStartQuiz(req, res, next) {
     const { username, password, quizSpecs } = req.body

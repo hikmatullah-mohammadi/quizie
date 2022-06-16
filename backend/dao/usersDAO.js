@@ -1,5 +1,5 @@
-// import data from './../data.js'
-import { countTheNumberOfCorrectAnswers, getQuestions, positionCorrectAnswerIndexRandomly } from './../utils.js'
+import data from './../data.js'
+import { countTheNumberOfCorrectAnswers, decryptUserId, getQuestions, positionCorrectAnswerIndexRandomly } from './../utils.js'
 
 let users
 export default class usersDAO {
@@ -11,22 +11,42 @@ export default class usersDAO {
     }
   }
   
-  static async getUserData({username, password}) {
-    const query = {$and: [{username: {$eq: username}}, {password: {$eq: password}}]}
+  static async signupOrLogin({ user_id, username}) {
+    // decrypt user id
+    const decrypted_user_id = decryptUserId(user_id)
+    const query = {_id: {$eq: decrypted_user_id}}
+    const defaultDoc = {
+      numberOfQuizes: 0,
+      numberOfQuestions: 0,
+      totalNumberOfQuestions: 0,
+      totalQuestionsAnsweredCorrectly: 0,
+      categories: [],
+      lastQuestionsList: []
+    }
     try {
       const user = await users.findOne(query)
-      delete user._id
-      delete user.lastQuestionsList
-      return user
+      if (user) {
+        delete user.lastQuestionsList
+        return user
+      } else {
+        await users.insertOne({
+          _id: decrypted_user_id,
+          username,
+          ...defaultDoc
+        })
+        return await users.findOne(query)
+      }
     } catch(err) {
       console.error(err)
       return
     }
   }
+  static async getUserData({username, password}) {
+  }
 
   static async startQuiz({username, password, quizSpecs }) {
     // TODO: call the api here
-    const { data } = await getQuestions(quizSpecs)    
+    // const { data } = await getQuestions(quizSpecs)    
 
     // put correct answer and incorrect answers together in an array
     const questions = data.slice(0, quizSpecs.numberOfQuestions).map(q => ({
