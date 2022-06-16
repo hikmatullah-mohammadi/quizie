@@ -1,7 +1,7 @@
 import http from './../http-common.js'
 
 class QuizDataServices {
-  static getUserData(data) {
+  static signupOrLogin(data) {
     return http.post('/user', data)
   }
   static startQuiz(data) {

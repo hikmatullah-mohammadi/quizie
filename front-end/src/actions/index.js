@@ -2,13 +2,21 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
 import * as actionTypes from './../actions/types'
 import QuizDataServices from './../services/quiz'
 import store from './../store'
+import { encryptUserId,  encryptUserSignature } from './../utils'
 
-export const login = createAsyncThunk(actionTypes.loggedIn, async () => {
-  const userData = await QuizDataServices.getUserData({username: 'hikmatullah_m80', password: '1234'})
-  return {
-    userData: userData.data
+export const login = createAsyncThunk(actionTypes.loggedIn, async user => {
+  let {picture: avatar, email, sub: user_id } = user
+  const username = email.slice(0, 20) || email
+
+  user_id = encryptUserId(user_id)
+  const user_signature = encryptUserSignature(user_id)
+
+  const userData = await QuizDataServices.signupOrLogin({user_id, user_signature, username})
+  if (userData){
+    return { userData: {...userData.data, avatar} }
   }
 })
+
 export const logout = createAction(actionTypes.loggedOut)
 
 export const openQuizSelectionPage = createAction(actionTypes.quizSelectionPageOpened)
