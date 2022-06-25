@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux"
-import { login, setIsWaiting } from "../actions"
+import { loginAndOrFetchUserData, setIsWaiting } from "../actions"
+import { useAuth0 } from '@auth0/auth0-react'
 
 const HomeNotLoggedIn = () => {
   const dispatch = useDispatch()
+  const { loginWithRedirect } = useAuth0()
   return (
     <div className="home-not-logged-in">
       <section className="welcome-msg">
@@ -39,6 +41,7 @@ const HomeNotLoggedIn = () => {
         className="btn-get-started"
         onClick={async () => {
           dispatch(setIsWaiting(true))
+          // loginWithRedirect()
           const user = {
             "nickname":"hikmatullah.m80",
             "name":"hikmatullah.m80@gmail.com",
@@ -46,7 +49,7 @@ const HomeNotLoggedIn = () => {
             "updated_at":"2022-06-15T19:08:41.487Z",
             "email":"hikmatullah.m80@gmail.com","email_verified":true,"sub":"auth0|62a3eb53fe7b951b13cf7c23"
           }
-          await dispatch(login(user))
+          dispatch(loginAndOrFetchUserData(user))
           dispatch(setIsWaiting(false))
         }}
         >Get Started</button>

@@ -5,8 +5,8 @@ const initialState = {
   questions: [],
 
   userData: {
+    user_id: '',
     username: '',
-    password: '',
     avatar: '',
     numberOfQuizes: 0,
     totalNumberOfQuestions: 0,

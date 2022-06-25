@@ -2,7 +2,7 @@ import usersDAO from "../dao/usersDAO.js";
 import EntryValidations from './../entryValidations.js'
 
 export default class UsersController {
-  static async apiSignupOrLogin (req, res, next) {
+  static async apiLoginOrGetUserData (req, res, next) {
     const {user_id, user_signature, username} = req.body
 
     // validate !!!!
@@ -12,25 +12,34 @@ export default class UsersController {
       return
     }
 
-    const user = await usersDAO.signupOrLogin({ user_id, username})
+    const user = await usersDAO.loginOrGetUserData({ user_id, username})
     if (user){
       res.json(user)
       return
     }
     res.send({error: 'Failed! You are not authenticated.'})
   }
+  
   static async apiStartQuiz(req, res, next) {
-    const { username, password, quizSpecs } = req.body
+    const { user_id, user_signature, quizSpecs } = req.body
     
     // validate !!!!
-    const validate = EntryValidations.validateStartQuiz(quizSpecs)
-    if (validate.status === 'invalid') {
-      res.json({error: validate.errMsg})
+    const validateQuizSpecs = EntryValidations.validateStartQuiz(quizSpecs)
+    if (validateQuizSpecs.status === 'invalid') {
+      res.json({error: validateQuizSpecs.errMsg})
       return
     }
 
+    // validate user_id (authentication) !!!!
+    const validateUserID = EntryValidations.validateUserIdAndSignature(user_id, user_signature)
+    if (validateUserID.status === 'invalid') {
+      res.json({error: "Invalid user!"})
+      return
+    }
+
+    // communicate with DAO
     try {
-      const response = await usersDAO.startQuiz({username, password, quizSpecs})
+      const response = await usersDAO.startQuiz({user_id, quizSpecs})
       if (response.error){
         res.send({error: 'Failted. You might not be authorized.'})
         return
@@ -42,17 +51,25 @@ export default class UsersController {
     }    
   }
   
+  // 
   static async apiSubmitAnswer (req, res, next) {
-    const { username, password, answers } = req.body
+    const { user_id, user_signature, answers } = req.body
 
-    // validate !!!
+    // validate SubmitAnswers action!!!
     const validate = EntryValidations.validateSubmitAnswers(answers)
     if (validate.status === 'invalid') {
       res.json({error: validate.errMsg})
       return
     }
 
-    const numberOfCorrectAnswers = await usersDAO.submitAnswers({username, password, answers})
+    // validate user_id (authentication) !!!!
+    const validateUserID = EntryValidations.validateUserIdAndSignature(user_id, user_signature)
+    if (validateUserID.status === 'invalid') {
+      res.json({error: "Invalid user!"})
+      return
+    }
+
+    const numberOfCorrectAnswers = await usersDAO.submitAnswers({user_id, answers})
     if (numberOfCorrectAnswers >= 0){
       res.json({numberOfCorrectAnswers})
       return

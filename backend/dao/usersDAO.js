@@ -11,9 +11,10 @@ export default class usersDAO {
     }
   }
   
-  static async signupOrLogin({ user_id, username}) {
+  static async loginOrGetUserData({ user_id, username}) {
     // decrypt user id
     const decrypted_user_id = decryptUserId(user_id)
+
     const query = {_id: {$eq: decrypted_user_id}}
     const defaultDoc = {
       numberOfQuizes: 0,
@@ -40,10 +41,8 @@ export default class usersDAO {
       return
     }
   }
-  static async getUserData({username, password}) {
-  }
 
-  static async startQuiz({username, password, quizSpecs }) {
+  static async startQuiz({user_id, quizSpecs }) {
     // TODO: call the api here
     // const { data } = await getQuestions(quizSpecs)    
 
@@ -59,8 +58,10 @@ export default class usersDAO {
       answers: positionCorrectAnswerIndexRandomly(q.answers)
     }))
     
+    // decrypt user id
+    const decrypted_user_id = decryptUserId(user_id)
     // update the database
-    const query = { $and: [{username: {$eq: username}}, {password: {$eq: password}}] }
+    const query = {_id: {$eq: decrypted_user_id}}
     try {
       const { numberOfQuizes, totalNumberOfQuestions, categories } = await users.findOne(query)
       const updateResponse = await users.updateOne(query, {
@@ -81,8 +82,12 @@ export default class usersDAO {
     }
   }
   
-  static async submitAnswers({username, password, answers }) {
-    const query = { $and: [{username: {$eq: username}}, {password: {$eq: password}}]}
+  static async submitAnswers({user_id, answers }) {
+    // decrypt user id
+    const decrypted_user_id = decryptUserId(user_id)
+    
+    // update db
+    const query = {_id: {$eq: decrypted_user_id}}
     const { totalQuestionsAnsweredCorrectly: nOfCA } = await users.findOne(query)
     const {lastQuestionsList} = await users.findOne(query)
     const numberOfCorrectAnswers = countTheNumberOfCorrectAnswers(lastQuestionsList, answers)

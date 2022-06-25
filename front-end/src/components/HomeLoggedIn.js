@@ -1,11 +1,21 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAndOrFetchUserData, logoutAction, openQuizSelectionPage, setIsWaiting } from "../actions";
 import Records from "./Records";
-import Ratings from "./Records";
+
 
 const HomeLoggedIn = () => {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.quizReducer.userData)
+  const {user, logout} = useAuth0()
+  
+  // useEffect(() => {
+  //   dispatch(setIsWaiting(true))
+  //   dispatch(loginAndOrFetchUserData(user))
+  //   dispatch(setIsWaiting(false))
+  // }, [dispatch, user])
+
   return (
     <div className="home-logged-in">
       <h1>WELCOME!</h1>
@@ -37,12 +47,15 @@ const HomeLoggedIn = () => {
       </button>
       <button
         className="btn-logout"
-        onClick={() => dispatch(logout())}
+        onClick={async () => {
+          // await logout()
+          dispatch(logoutAction())
+        }}
       >
         Logout
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default HomeLoggedIn;
+export default HomeLoggedIn
