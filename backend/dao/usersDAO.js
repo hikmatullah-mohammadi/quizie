@@ -66,7 +66,7 @@ export default class usersDAO {
       const updateResponse = await users.updateOne(query, {
         $set: {
           totalNumberOfQuestions: totalNumberOfQuestions + parseInt(quizSpecs.numberOfQuestions),
-          categories: !categories.includes(quizSpecs.category) ? [...categories, quizSpecs.category] : categories,
+          categories: [...new Set([...categories, quizSpecs.category])],
           numberOfQuizes: numberOfQuizes + 1,
           lastQuestionsList: questionsWithRandomCorrectAnsIndex
         }
