@@ -1,21 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { logout, openQuizSelectionPage, setIsWaiting } from "../actions";
+import { loginAndOrFetchUserData, logoutAction, openQuizSelectionPage, setIsWaiting } from "../actions";
+import Records from "./Records";
+import Ratings from "./Records";
 
 const HomeLoggedIn = () => {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.quizReducer.userData)
   return (
     <div className="home-logged-in">
-      <h3>WELCOME!</h3>
+      <h1>WELCOME!</h1>
       <div className="records">
         {
           userData.numberOfQuizes > 0 ?
-          <p>
-            You have taken <span>{userData.numberOfQuizes}&nbsp;quiz(es)</span> in different categories
-            including <em><b>{userData.categories.join(', ')}</b></em>. And you have correctly
-            answered <span>{userData.totalQuestionsAnsweredCorrectly}&nbsp;question(s)</span> out of
-            <span>{userData.totalNumberOfQuestions}</span>.
-          </p> : 
+            <Records /> : 
           <p>You haven't passed any quizes yet <span>:)</span></p>
         }
         <div className="rating">

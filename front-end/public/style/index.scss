@@ -76,6 +76,14 @@ button:hover {
       }
     }
   }
+};
+
+.progress {
+  width: 100%;
+  height: 20px;
+}
+.text-center {
+  text-align: center;
 }
 
 body {
@@ -177,7 +185,7 @@ body {
       padding: 15px;
       .welcome-msg {
         @include home-elem-style();
-        h3 {
+        h2 {
           color: black;
           padding-bottom: 20px;
           border-bottom: 1px solid red;
@@ -194,7 +202,7 @@ body {
       }
       .difficulties, .categories {
         @include home-elem-style();
-        h3 {
+        h2 {
           color: black;
           padding-bottom: 20px;
           border-bottom: 1px solid red;
@@ -216,21 +224,22 @@ body {
       @include main-elmnts-anim();
       margin-top: 10px;
       padding: 15px;
-      h3 {
+      & > h1 {
         @include home-elem-style();
         padding: 40px;
       }
       .records {
-        p {
+        .records-progessbars {
           @include home-elem-style();
-          padding: 40px 0;
+          padding-top: 30px;
+          padding-bottom: 30px;
           line-height: 25px;
-          span {
-            background-color: gold;
-            font-weight: bold;
-            color: white;
-            border-radius: 5px;
-            padding: 5px;
+          section {
+            text-align: left;
+          }
+          h1, h2 {
+            padding: 10px 0;
+            text-align: center;
           }
         }
         .rating {
@@ -260,19 +269,31 @@ body {
     .quiz-selection {
       @include main-elmnts-anim();
       padding: 15px;
-      .notice {
+      section {
         @include home-elem-style();
         text-align: left;
         padding: 40px 15px;
-        p:first-of-type {
-          border-bottom: 2px solid primary-color(lightred);
+        h2 {
           padding-bottom: 20px;
+        }
+      }
+      .notice {
+        div {
+          border-bottom: 2px solid primary-color(lightred);
+          padding-bottom: 10px;
           margin-bottom: 10px;
+          ul {
+            list-style-position: inside;
+            li {
+              padding-bottom: 8px;
+            }
+          }
+          .happy-assessment {
+            margin-top: 20px;
+          }
         }
       }
       form {
-        text-align: left;
-        @extend .notice;
         label {
           display: block;
           margin-bottom: 15px;
