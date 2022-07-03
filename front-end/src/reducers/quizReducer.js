@@ -14,9 +14,10 @@ const initialState = {
     categories: []
   },
   controls: {
-    currentPage: "homeNotLoggedIn",
+    currentPage: "homeLoggedIn",
     isWaiting: false,
-    currentNumberOfCorrectAnswers: 0
+    currentNumberOfCorrectAnswers: 0,
+    currentCategory: ''
   }
 }
 export default createReducer(initialState, {
@@ -33,16 +34,29 @@ export default createReducer(initialState, {
   },
   [actionTypes.quizStarted+'/fulfilled']: (state, action) => {
     state.questions = action.payload.questions
-    state.controls.currentPage = "questions"
     state.userData.totalNumberOfQuestions += action.payload.questions.length
     state.userData.numberOfQuizes += 1
-    state.userData.categories.push(action.payload.category)
-    // remove duplicates
-    state.userData.categories = [...new Set(state.userData.categories)]
+
+    const index = state.userData.categories.findIndex(item => item.title === action.payload.category)
+    if (index > -1 ){
+      state.userData.categories[index].questions += action.payload.questions.length
+    } else {
+      state.userData.categories.push({
+        title: action.payload.category,
+        questions: action.payload.questions.length,
+        correctAnswers: 0
+      })
+    }
+    state.controls.currentCategory = action.payload.category
+    state.controls.currentPage = "questions"
+    
   },
   [actionTypes.answersSubmitted+"/fulfilled"]: (state, action) => {
-    state.userData.totalQuestionsAnsweredCorrectly += action.payload.numberOfCorrectAnswers
-    state.controls.currentNumberOfCorrectAnswers = action.payload.numberOfCorrectAnswers
+    const {numberOfCorrectAnswers, category} = action.payload
+    state.userData.totalQuestionsAnsweredCorrectly += numberOfCorrectAnswers
+    const index = state.userData.categories.findIndex(item => item.title === category)
+    state.userData.categories[index].correctAnswers += numberOfCorrectAnswers
+    state.controls.currentNumberOfCorrectAnswers = numberOfCorrectAnswers
   },
   [actionTypes.HomeLoggedInOpened]: (state, action) => {
     state.controls.currentPage = "homeLoggedIn"
@@ -52,6 +66,5 @@ export default createReducer(initialState, {
   },
   [actionTypes.loggedOut]: (state, action) => {
     state.userData = {}
-    state.controls.currentPage = 'homeNotLoggedIn'
   }
 })

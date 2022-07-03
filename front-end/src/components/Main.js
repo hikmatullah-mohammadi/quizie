@@ -7,33 +7,31 @@ import QuizSelection from './QuizSelection'
 import Footer from './Footer'
 import { useSelector } from 'react-redux'
 import LoadingDisplay from './LoadingDisplay'
-import { useEffect } from 'react'
 
 const Main = () => {
   const {isAuthenticated, user,isLoading, error} = useAuth0()
   
   const currentPage = useSelector(state => state.quizReducer.controls.currentPage)
   const isWaiting = useSelector(state => state.quizReducer.controls.isWaiting)
-  // useEffect(() => {
-  //   console.log('user: ', user);
-  //   console.log('isAuthernticated: ', isAuthenticated);
-  // })
+  
   return (
     <main>
       { isWaiting && <LoadingDisplay /> }
       <Header />
-      {/* {
+      {/* <HomeLoggedIn /> */}
+      {
         isLoading ? <LoadingDisplay /> : (
-          !error && isAuthenticated && currentPage === "homeLoggedIn" && (
-            <HomeLoggedIn />
+          !error && isAuthenticated && (
+            currentPage === "homeLoggedIn" ? <HomeLoggedIn /> : (
+              currentPage === "quizSelection" ? <QuizSelection /> : (
+                currentPage === "questions" && <Questions />
+              )
+            )
           )
         )
-      } */}
-      {/* { (currentPage === "homeNotLoggedIn" && !isAuthenticated) && <HomeNotLoggedIn /> } */}
-      { (currentPage === "homeNotLoggedIn") && <HomeNotLoggedIn /> }
-      { currentPage === "homeLoggedIn" && <HomeLoggedIn /> }
-      { currentPage === "quizSelection" && <QuizSelection /> }
-      { currentPage === "questions" && <Questions /> }
+      }
+      {/* if not athenticated, display homeNotLoggedIn page */}
+      { (!isAuthenticated) && <HomeNotLoggedIn /> }
       <Footer />
     </main>
   )

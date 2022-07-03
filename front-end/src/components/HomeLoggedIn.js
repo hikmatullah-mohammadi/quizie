@@ -3,19 +3,25 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAndOrFetchUserData, logoutAction, openQuizSelectionPage, setIsWaiting } from "../actions";
 import Records from "./Records";
-
+import AlertBox from './AlertBox'
 
 const HomeLoggedIn = () => {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.quizReducer.userData)
   const {user, logout} = useAuth0()
   
-  // useEffect(() => {
-  //   dispatch(setIsWaiting(true))
-  //   dispatch(loginAndOrFetchUserData(user))
-  //   dispatch(setIsWaiting(false))
-  // }, [dispatch, user])
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch(setIsWaiting(true))
+      await dispatch(loginAndOrFetchUserData(user))
+      dispatch(setIsWaiting(false))
+    }
+    fetchData()
+  }, [dispatch, user])
 
+  if (!user.email_verified){
+    return <AlertBox alertType="Warning" alertMsg="Please verify your email and refresh the page. We sent you a verification email when you signed up."/>
+  }  
   return (
     <div className="home-logged-in">
       <h1>WELCOME!</h1>
@@ -23,7 +29,7 @@ const HomeLoggedIn = () => {
         {
           userData.numberOfQuizes > 0 ?
             <Records /> : 
-          <p>You haven't passed any quizes yet <span>:)</span></p>
+          <div className='noquizpassed'><h4>Oops! You haven't passed any quizes yet.</h4></div>
         }
         <div className="rating">
           <i className="fa fa-star"></i>
@@ -48,8 +54,10 @@ const HomeLoggedIn = () => {
       <button
         className="btn-logout"
         onClick={async () => {
-          // await logout()
-          dispatch(logoutAction())
+          dispatch(setIsWaiting(true))
+          await logout()
+          await dispatch(logoutAction())
+          dispatch(setIsWaiting(false))
         }}
       >
         Logout

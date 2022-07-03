@@ -43,16 +43,18 @@ export const selectAnswer = createAction(actionTypes.answerSelected, (id, option
 }))
 
 export const openHomeLoggedIn = createAction(actionTypes.HomeLoggedInOpened)
-export const submitAnswers = createAsyncThunk(actionTypes.answersSubmitted, async answers => {
+
+export const submitAnswers = createAsyncThunk(actionTypes.answersSubmitted, async ({ category, answers }) => {
   const { user_id } = store.getState().quizReducer.userData
   const user_signature = encryptUserSignature(user_id)
   const argToPass = {
     user_id,
     user_signature,
+    category: category.toLowerCase(),
     answers
   }
   const { data } = await QuizDataServices.submitAnswers(argToPass)
-  return { numberOfCorrectAnswers: data.numberOfCorrectAnswers }
+  return { numberOfCorrectAnswers: data.numberOfCorrectAnswers, category: category.toLowerCase() }
 })
 
 export const setIsWaiting = createAction(actionTypes.isWaitingSet, status => ({

@@ -53,7 +53,7 @@ export default class UsersController {
   
   // 
   static async apiSubmitAnswer (req, res, next) {
-    const { user_id, user_signature, answers } = req.body
+    const { user_id, user_signature, category, answers } = req.body
 
     // validate SubmitAnswers action!!!
     const validate = EntryValidations.validateSubmitAnswers(answers)
@@ -69,7 +69,7 @@ export default class UsersController {
       return
     }
 
-    const numberOfCorrectAnswers = await usersDAO.submitAnswers({user_id, answers})
+    const numberOfCorrectAnswers = await usersDAO.submitAnswers({user_id, category, answers})
     if (numberOfCorrectAnswers >= 0){
       res.json({numberOfCorrectAnswers})
       return

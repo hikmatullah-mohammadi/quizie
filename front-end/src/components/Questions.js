@@ -8,6 +8,8 @@ import { isAllQuestionsAnswered } from './../utils'
 const Questions = () => {
   const dispatch = useDispatch()
   const questions = useSelector(state => state.quizReducer.questions)
+  const currentCategory = useSelector(state => state.quizReducer.controls.currentCategory)
+  
 
   const [status, setStatus] = useState({
     isSubmitting: false,
@@ -26,6 +28,8 @@ const Questions = () => {
   }
   
   const handleSubmit = () => {
+    
+    // display the alert box when not all questions are answered
     if (!isAllQuestionsAnswered(questions)) {
       setDisplayAlertBox(true)
       setTimeout(() => {
@@ -39,7 +43,7 @@ const Questions = () => {
     const answers = questions.map(item => item.selectedAnswer)
     dispatch(setIsWaiting(true))
     setTimeout(async () => {
-      await dispatch(submitAnswers(answers))
+      await dispatch(submitAnswers({ category: currentCategory, answers}))
       dispatch(setIsWaiting(false))
       setStatus({isSubmitting: false, isSubmitted: true})
     }, 1000);

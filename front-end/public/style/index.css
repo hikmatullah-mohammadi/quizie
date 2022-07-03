@@ -50,6 +50,7 @@ button:hover {
 .progress {
   width: 100%;
   height: 20px;
+  accent-color: #09ff00;
 }
 
 .text-center {
@@ -284,6 +285,17 @@ body main .home-logged-in .records .records-progessbars section {
 body main .home-logged-in .records .records-progessbars h1, body main .home-logged-in .records .records-progessbars h2 {
   padding: 10px 0;
   text-align: center;
+}
+
+body main .home-logged-in .records .noquizpassed {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 body main .home-logged-in .records .rating {

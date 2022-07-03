@@ -1,4 +1,4 @@
-import data from './../data.js'
+// import data from './../data.js'
 import { countTheNumberOfCorrectAnswers, decryptUserId, getQuestions, positionCorrectAnswerIndexRandomly } from './../utils.js'
 
 let users
@@ -44,7 +44,7 @@ export default class usersDAO {
 
   static async startQuiz({user_id, quizSpecs }) {
     // TODO: call the api here
-    // const { data } = await getQuestions(quizSpecs)    
+    const { data } = await getQuestions(quizSpecs)    
 
     // put correct answer and incorrect answers together in an array
     const questions = data.slice(0, quizSpecs.numberOfQuestions).map(q => ({
@@ -67,9 +67,15 @@ export default class usersDAO {
       const updateResponse = await users.updateOne(query, {
         $set: {
           totalNumberOfQuestions: totalNumberOfQuestions + parseInt(quizSpecs.numberOfQuestions),
-          categories: [...new Set([...categories, quizSpecs.category])],
+          categories: categories.findIndex(item => item.title === quizSpecs.category) > -1 ? 
+            categories.map(item => item.title === quizSpecs.category ? {...item, questions: item.questions + parseInt(quizSpecs.numberOfQuestions)} : item) :
+            [...categories, {
+              title:quizSpecs.category,
+              questions: parseInt(quizSpecs.numberOfQuestions),
+              correctAnswers: 0
+            }],
           numberOfQuizes: numberOfQuizes + 1,
-          lastQuestionsList: questionsWithRandomCorrectAnsIndex
+          lastQuestionsList: questionsWithRandomCorrectAnsIndex,
         }
       })
       if (updateResponse.modifiedCount > 0) {
@@ -82,19 +88,23 @@ export default class usersDAO {
     }
   }
   
-  static async submitAnswers({user_id, answers }) {
+  static async submitAnswers({user_id, category, answers }) {
     // decrypt user id
     const decrypted_user_id = decryptUserId(user_id)
     
     // update db
     const query = {_id: {$eq: decrypted_user_id}}
-    const { totalQuestionsAnsweredCorrectly: nOfCA } = await users.findOne(query)
+    const { totalQuestionsAnsweredCorrectly: nOfCA, categories } = await users.findOne(query)
     const {lastQuestionsList} = await users.findOne(query)
     const numberOfCorrectAnswers = countTheNumberOfCorrectAnswers(lastQuestionsList, answers)
+    
     const newValues = {$set:
       {
         totalQuestionsAnsweredCorrectly: nOfCA + numberOfCorrectAnswers,
-        lastQuestionsList: []
+        categories: categories.map(item => item.title ===  category ? (
+            {...item, correctAnswers: item.correctAnswers + numberOfCorrectAnswers }
+          ) : item ),
+        lastQuestionsList: [],
       }
     }
     const response = await users.updateOne(query, newValues)

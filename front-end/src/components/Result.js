@@ -4,7 +4,6 @@ import { openHomeLoggedIn, openQuizSelectionPage } from "./../actions"
 const Result = props => {
   const dispatch = useDispatch()
   const currentNumberOfCorrectAnswers = useSelector(state => state.quizReducer.controls.currentNumberOfCorrectAnswers)
-  console.log(currentNumberOfCorrectAnswers)
   return (
     <div className="result">
       <div>
