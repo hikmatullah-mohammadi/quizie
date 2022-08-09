@@ -5,13 +5,13 @@ import store from './../store'
 import { encryptUserId,  encryptUserSignature } from './../utils'
 
 export const loginAndOrFetchUserData = createAsyncThunk(actionTypes.loggedIn, async user => {
-  let {picture: avatar, email, sub: user_id } = user
-  const username = email.slice(0, 20) || email
+  let {picture: avatar, sub: user_id, name, email } = user
+  const username = name.slice(0, 20) || name
 
   user_id = encryptUserId(user_id)
   const user_signature = encryptUserSignature(user_id)
 
-  const userData = await QuizDataServices.signupOrLogin({user_id, user_signature, username})
+  const userData = await QuizDataServices.signupOrLogin({user_id, user_signature, username, email})
   if (userData){
     return { userData: {...userData.data, user_id, avatar} }
   }

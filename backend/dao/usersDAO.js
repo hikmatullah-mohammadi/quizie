@@ -11,7 +11,7 @@ export default class usersDAO {
     }
   }
   
-  static async loginOrGetUserData({ user_id, username}) {
+  static async loginOrGetUserData({ user_id, username, email}) {
     // decrypt user id
     const decrypted_user_id = decryptUserId(user_id)
 
@@ -32,6 +32,7 @@ export default class usersDAO {
         await users.insertOne({
           _id: decrypted_user_id,
           username,
+          email,
           ...defaultDoc
         })
         return await users.findOne(query)

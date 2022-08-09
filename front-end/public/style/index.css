@@ -210,7 +210,6 @@ body main .home-not-logged-in .welcome-msg .dollor {
   background-color: #09ff00;
   background-color: gold;
   font-weight: bold;
-  color: white;
   border-radius: 5px;
   padding: 5px;
 }
@@ -242,7 +241,6 @@ body main .home-not-logged-in .difficulties ul li, body main .home-not-logged-in
 
 body main .home-not-logged-in .btn-get-started {
   background-color: #09ff00;
-  color: white;
   border-radius: 5px;
   font-weight: 900;
   width: 100%;
@@ -324,7 +322,6 @@ body main .home-logged-in .records .rating span {
 
 body main .home-logged-in .btn-take-quiz {
   background-color: #09ff00;
-  color: white;
   border-radius: 5px;
   font-weight: 900;
   width: 100%;
@@ -334,7 +331,6 @@ body main .home-logged-in .btn-take-quiz {
 
 body main .home-logged-in .btn-logout {
   background-color: #09ff00;
-  color: white;
   border-radius: 5px;
   font-weight: 900;
   width: 100%;
@@ -395,7 +391,6 @@ body main .quiz-selection form label * {
 
 body main .quiz-selection form .btn-start-quiz {
   background-color: #09ff00;
-  color: white;
   border-radius: 5px;
   font-weight: 900;
   width: 100%;
@@ -511,7 +506,6 @@ body main .questions .result div:first-child progress {
 
 body main .questions .result div .back-to-home, body main .questions .result div .take-another-quiz {
   background-color: #09ff00;
-  color: white;
   border-radius: 5px;
   font-weight: 900;
   width: 100%;
@@ -522,7 +516,6 @@ body main .questions .result div .back-to-home, body main .questions .result div
 
 body main .questions .btn-submit {
   background-color: #09ff00;
-  color: white;
   border-radius: 5px;
   font-weight: 900;
   width: 100%;

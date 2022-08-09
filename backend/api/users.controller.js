@@ -3,7 +3,7 @@ import EntryValidations from './../entryValidations.js'
 
 export default class UsersController {
   static async apiLoginOrGetUserData (req, res, next) {
-    const {user_id, user_signature, username} = req.body
+    const {user_id, user_signature, username, email} = req.body
 
     // validate !!!!
     const validate = EntryValidations.validateUserIdAndSignature(user_id, user_signature)
@@ -12,7 +12,7 @@ export default class UsersController {
       return
     }
 
-    const user = await usersDAO.loginOrGetUserData({ user_id, username})
+    const user = await usersDAO.loginOrGetUserData({ user_id, username, email })
     if (user){
       res.json(user)
       return
