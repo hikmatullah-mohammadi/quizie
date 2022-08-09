@@ -88,6 +88,7 @@ body main header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  z-index: 12;
 }
 
 body main header h1 {
