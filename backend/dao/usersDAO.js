@@ -48,7 +48,7 @@ export default class usersDAO {
     const { data } = await getQuestions(quizSpecs)    
 
     // put correct answer and incorrect answers together in an array
-    const questions = data.slice(0, quizSpecs.numberOfQuestions).map(q => ({
+    const questions = data.map(q => ({
       ...q,
       answers: [q.correctAnswer, ...q.incorrectAnswers]
     }))
@@ -64,18 +64,19 @@ export default class usersDAO {
     // update the database
     const query = {_id: {$eq: decrypted_user_id}}
     try {
-      const { numberOfQuizes, totalNumberOfQuestions, categories } = await users.findOne(query)
+      const { categories } = await users.findOne(query)
       const updateResponse = await users.updateOne(query, {
+        $inc: {totalNumberOfQuestions: parseInt(quizSpecs.numberOfQuestions)},
+        $inc: {numberOfQuizes: 1},
         $set: {
-          totalNumberOfQuestions: totalNumberOfQuestions + parseInt(quizSpecs.numberOfQuestions),
+          // update categories or add a new category
           categories: categories.findIndex(item => item.title === quizSpecs.category) > -1 ? 
             categories.map(item => item.title === quizSpecs.category ? {...item, questions: item.questions + parseInt(quizSpecs.numberOfQuestions)} : item) :
             [...categories, {
-              title:quizSpecs.category,
+              title: quizSpecs.category,
               questions: parseInt(quizSpecs.numberOfQuestions),
               correctAnswers: 0
             }],
-          numberOfQuizes: numberOfQuizes + 1,
           lastQuestionsList: questionsWithRandomCorrectAnsIndex,
         }
       })
@@ -95,13 +96,13 @@ export default class usersDAO {
     
     // update db
     const query = {_id: {$eq: decrypted_user_id}}
-    const { totalQuestionsAnsweredCorrectly: nOfCA, categories } = await users.findOne(query)
-    const {lastQuestionsList} = await users.findOne(query)
+   
+    const {lastQuestionsList, categories} = await users.findOne(query)
     const numberOfCorrectAnswers = countTheNumberOfCorrectAnswers(lastQuestionsList, answers)
     
-    const newValues = {$set:
-      {
-        totalQuestionsAnsweredCorrectly: nOfCA + numberOfCorrectAnswers,
+    const newValues = {
+      $inc: {totalQuestionsAnsweredCorrectly: numberOfCorrectAnswers},
+      $set:{
         categories: categories.map(item => item.title ===  category ? (
             {...item, correctAnswers: item.correctAnswers + numberOfCorrectAnswers }
           ) : item ),
