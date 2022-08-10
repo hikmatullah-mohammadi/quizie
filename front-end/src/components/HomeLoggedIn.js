@@ -8,7 +8,7 @@ import AlertBox from './AlertBox'
 const HomeLoggedIn = () => {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.quizReducer.userData)
-  const {user, logout} = useAuth0()
+  const {user, logout, isAuthenticated} = useAuth0()
   
   useEffect(() => {
     const fetchData = async () => {
@@ -55,8 +55,7 @@ const HomeLoggedIn = () => {
         className="btn-logout"
         onClick={async () => {
           dispatch(setIsWaiting(true))
-          await logout()
-          await dispatch(logoutAction())
+          logout()
           dispatch(setIsWaiting(false))
         }}
       >
