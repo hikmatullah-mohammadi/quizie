@@ -28,13 +28,13 @@ Quizie is a platform where you can take multiple-choice quizes about different s
 
 ## Screen shots
 ### Home not logged in
-<img alt="Home not logged in" src="" width='100%'/>
+<img alt="Home not logged in" src="https://github.com/hikmatullah-mohammadi/quizie/blob/master/front-end/public/images/scr_shots/home_not_logged_in.png" width='100%'/>
 
 ### Home logged in
-<img alt="Home logged in" src="" width='100%'/>
+<img alt="Home logged in" src="https://github.com/hikmatullah-mohammadi/quizie/blob/master/front-end/public/images/scr_shots/home_logged_in.png" width='100%'/>
 
 ### Questions
-<img alt="Questions" src="" width='100%'/>
+<img alt="Questions" src="https://github.com/hikmatullah-mohammadi/quizie/blob/master/front-end/public/images/scr_shots/questions.png" width='100%'/>
 
 
 ## Built with
