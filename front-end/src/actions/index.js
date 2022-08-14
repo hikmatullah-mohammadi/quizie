@@ -11,9 +11,10 @@ export const loginAndOrFetchUserData = createAsyncThunk(actionTypes.loggedIn, as
   user_id = encryptUserId(user_id)
   const user_signature = encryptUserSignature(user_id)
 
-  const userData = await QuizDataServices.signupOrLogin({user_id, user_signature, username, email})
-  if (userData){
-    return { userData: {...userData.data, user_id, avatar} }
+  const response = await QuizDataServices.signupOrLogin({user_id, user_signature, username, email})
+  console.log(response);
+  if (response.status === 200){
+    return { userData: {...response.data.user, user_id, avatar} }
   } else throw new Error('Something went wrong.')
 })
 
@@ -29,11 +30,10 @@ export const startQuiz = createAsyncThunk(actionTypes.quizStarted,  async quizSp
     quizSpecs
   }
 
-  const { data } = await QuizDataServices.startQuiz(argToPass)
-  console.log(data);
-  if (data.length > 0) {
+  const response = await QuizDataServices.startQuiz(argToPass)
+  if (response.status === 200) {
     return {
-      questions: data,
+      questions: response.data.questions,
       category: quizSpecs.category
     }
   } else throw new Error('Something went wrong.')
@@ -54,9 +54,9 @@ export const submitAnswers = createAsyncThunk(actionTypes.answersSubmitted, asyn
     category: category.toLowerCase(),
     answers
   }
-  const { data } = await QuizDataServices.submitAnswers(argToPass)
-  if (data.numberOfCorrectAnswers >= 0) {
-    return { numberOfCorrectAnswers: data.numberOfCorrectAnswers, category: category.toLowerCase() }
+  const response = await QuizDataServices.submitAnswers(argToPass)
+  if (response.status === 200) {
+    return { numberOfCorrectAnswers: response.data.numberOfCorrectAnswers, category: category.toLowerCase() }
   } else throw new Error('Something went wrong.')
 })
 

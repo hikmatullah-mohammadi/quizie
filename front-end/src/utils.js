@@ -10,11 +10,11 @@ export const isAllQuestionsAnswered = questions => {
 }
 
 export const encryptUserId = userId => {
-  const cipherText = cryptoJs.AES.encrypt(userId, 'k')
+  const cipherText = cryptoJs.AES.encrypt(userId, process.env.REACT_APP_USER_ID_ENC_KEY)
   return cipherText.toString()
 }
 export const encryptUserSignature = userSignature => {
-  const cipherText = cryptoJs.AES.encrypt(userSignature, 'k')
+  const cipherText = cryptoJs.AES.encrypt(userSignature, process.env.REACT_APP_USER_SIGNATURE_ENC_KEY)
   return cipherText.toString()
 }
 

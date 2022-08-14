@@ -1,14 +1,14 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAndOrFetchUserData, logoutAction, openQuizSelectionPage, setIsWaiting } from "../actions";
+import { loginAndOrFetchUserData, openQuizSelectionPage, setIsWaiting } from "../actions";
 import Records from "./Records";
 import AlertBox from './AlertBox'
 
 const HomeLoggedIn = () => {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.quizReducer.userData)
-  const {user, logout, isAuthenticated} = useAuth0()
+  const {user, logout } = useAuth0()
   
   useEffect(() => {
     const fetchData = async () => {

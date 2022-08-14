@@ -8,8 +8,9 @@ import store from './store'
 const { render } = ReactDOM
 const { StrictMode } = React
 
-const clientId = 'KbC4SP0EMGK031mQXveLtQO8vOZ79E9C'
-const domain = 'dev-qfuacjxb.us.auth0.com'
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
+const domain = process.env.REACT_APP_AUTH0_DOMAIN
+
 render(
   <StrictMode>
     <Auth0Provider
