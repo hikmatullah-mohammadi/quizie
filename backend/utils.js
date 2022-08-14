@@ -1,5 +1,7 @@
 import axios from 'axios'
 import cryptoJs from 'crypto-js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const positionCorrectAnswerIndexRandomly = answers => {
   let randonIndex // between 0-3
@@ -30,11 +32,11 @@ export const getQuestions = ({numberOfQuestions, category, difficulty}) => {
 
 
 export const decryptUserSignature = user_signature => {
-  const origText = cryptoJs.AES.decrypt(user_signature, 'k')
+  const origText = cryptoJs.AES.decrypt(user_signature, process.env.USER_SIGNATURE_ENC_KEY)
   return origText.toString(cryptoJs.enc.Utf8)
 }
 export const decryptUserId = user_id => {
-  const origText = cryptoJs.AES.decrypt(user_id, 'k')
+  const origText = cryptoJs.AES.decrypt(user_id, process.env.USER_ID_ENC_KEY)
   return origText.toString(cryptoJs.enc.Utf8)
 }
 

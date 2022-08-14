@@ -1,11 +1,10 @@
-// import data from './../data.js'
-import { countTheNumberOfCorrectAnswers, decryptUserId, getQuestions, positionCorrectAnswerIndexRandomly } from './../utils.js'
+import { countTheNumberOfCorrectAnswers, decryptUserId, getQuestions, positionCorrectAnswerIndexRandomly } from '../utils.js'
 
 let users
-export default class usersDAO {
+export default class QuizDAO {
   static async injectDB(client) {
     try {
-      users = await client.db('quizBackend').collection('users')
+      users = await client.db('quizie').collection('users')
     } catch(err) {
       console.error(err);
     }
@@ -66,8 +65,7 @@ export default class usersDAO {
     try {
       const { categories } = await users.findOne(query)
       const updateResponse = await users.updateOne(query, {
-        $inc: {totalNumberOfQuestions: parseInt(quizSpecs.numberOfQuestions)},
-        $inc: {numberOfQuizes: 1},
+        $inc: {totalNumberOfQuestions: parseInt(quizSpecs.numberOfQuestions), numberOfQuizes: 1},
         $set: {
           // update categories or add a new category
           categories: categories.findIndex(item => item.title === quizSpecs.category) > -1 ? 

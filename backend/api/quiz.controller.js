@@ -1,23 +1,23 @@
-import usersDAO from "../dao/usersDAO.js";
-import EntryValidations from './../entryValidations.js'
+import QuizDAO from "../dao/quizDAO.js";
+import EntryValidations from '../entryValidations.js'
 
-export default class UsersController {
+export default class QuizController {
   static async apiLoginOrGetUserData (req, res, next) {
     const {user_id, user_signature, username, email} = req.body
 
     // validate !!!!
     const validate = EntryValidations.validateUserIdAndSignature(user_id, user_signature)
     if (validate.status === 'invalid') {
-      res.json({error: "Invalid user!"})
+      res.status(400).json({error: "Invalid user!"})
       return
     }
 
-    const user = await usersDAO.loginOrGetUserData({ user_id, username, email })
+    const user = await QuizDAO.loginOrGetUserData({ user_id, username, email })
     if (user){
-      res.json(user)
+      res.status(200).json({user, success: true})
       return
     }
-    res.send({error: 'Failed! You are not authenticated.'})
+    res.status(401).send({error: 'Failed! You are not authenticated.'})
   }
   
   static async apiStartQuiz(req, res, next) {
@@ -26,28 +26,28 @@ export default class UsersController {
     // validate !!!!
     const validateQuizSpecs = EntryValidations.validateStartQuiz(quizSpecs)
     if (validateQuizSpecs.status === 'invalid') {
-      res.json({error: validateQuizSpecs.errMsg})
+      res.status(400).json({error: validateQuizSpecs.errMsg})
       return
     }
 
     // validate user_id (authentication) !!!!
     const validateUserID = EntryValidations.validateUserIdAndSignature(user_id, user_signature)
     if (validateUserID.status === 'invalid') {
-      res.json({error: "Invalid user!"})
+      res.status(400).json({error: "Invalid user!"})
       return
     }
 
     // communicate with DAO
     try {
-      const response = await usersDAO.startQuiz({user_id, quizSpecs})
+      const response = await QuizDAO.startQuiz({user_id, quizSpecs})
       if (response.error){
-        res.send({error: 'Failted. You might not be authorized.'})
+        res.status(401).send({error: 'Failted. You might not be authorized.'})
         return
       }
-      res.status(202).send(response.questions)
+      res.status(200).send({questions: response.questions, success: true})
     } catch(err) {
       console.error(err);
-      res.json({error: "Internal Error!"})
+      res.status(500).json({error: "Internal Error!"})
     }    
   }
   
@@ -58,22 +58,22 @@ export default class UsersController {
     // validate SubmitAnswers action!!!
     const validate = EntryValidations.validateSubmitAnswers(answers)
     if (validate.status === 'invalid') {
-      res.json({error: validate.errMsg})
+      res.status(400).json({error: validate.errMsg})
       return
     }
 
     // validate user_id (authentication) !!!!
     const validateUserID = EntryValidations.validateUserIdAndSignature(user_id, user_signature)
     if (validateUserID.status === 'invalid') {
-      res.json({error: "Invalid user!"})
+      res.status(400).json({error: "Invalid user!"})
       return
     }
 
-    const numberOfCorrectAnswers = await usersDAO.submitAnswers({user_id, category, answers})
+    const numberOfCorrectAnswers = await QuizDAO.submitAnswers({user_id, category, answers})
     if (numberOfCorrectAnswers >= 0){
-      res.json({numberOfCorrectAnswers})
+      res.status(200).json({numberOfCorrectAnswers, success: true})
       return
     }
-    res.send({error: 'Failted. You might not be authorized.'})
+    res.status(401).send({error: 'Failted. You might not be authorized.'})
   }
 }
