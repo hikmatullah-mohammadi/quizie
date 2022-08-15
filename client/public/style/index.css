@@ -1,0 +1,748 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Kubic;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.loading-display {
+  background-color: rgba(0, 0, 0, 0.753);
+  position: fixed;
+  inset: 0 0;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  z-index: 15;
+}
+
+.loading-display div {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.loading-display div p {
+  clear: both;
+  color: #09ff00;
+}
+
+.loading-display div div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.loading-display div div hr {
+  float: left;
+  width: 10px;
+  -webkit-animation: linear 3s rotate-anim infinite;
+          animation: linear 3s rotate-anim infinite;
+}
+
+.progress {
+  width: 100%;
+  height: 20px;
+  accent-color: #09ff00;
+}
+
+.text-center {
+  text-align: center;
+}
+
+body {
+  background-color: #f1efef;
+  -webkit-animation: rainbow-anim 10s linear infinite;
+          animation: rainbow-anim 10s linear infinite;
+}
+
+body main {
+  padding-top: 80px;
+  background-color: white;
+  width: 90%;
+  margin: 20px auto;
+  border-radius: 15px;
+}
+
+body main header {
+  text-align: center;
+  background-color: white;
+  position: fixed;
+  inset: 0 5% auto 5%;
+  -webkit-box-shadow: 0 1px 2px #ece8e8;
+          box-shadow: 0 1px 2px #ece8e8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  z-index: 12;
+}
+
+body main header h1 {
+  cursor: pointer;
+  padding: 20px;
+}
+
+body main header h1::first-letter {
+  font-size: 1.5em;
+  color: #09ff00;
+}
+
+body main header .user {
+  padding: 10px;
+  padding-top: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body main header .user .avatar {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+body main header .user .avatar img {
+  width: 100%;
+}
+
+body main .login-page, body main .signup-page {
+  padding: 2%;
+}
+
+body main .login-page h1, body main .signup-page h1 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+body main .login-page input, body main .signup-page input {
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border-width: 1px;
+  font-size: 20px;
+  padding: 0 10px;
+  color: #424957;
+}
+
+body main .login-page label, body main .signup-page label {
+  color: #424957;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+body main .login-page input[type=submit], body main .signup-page input[type=submit] {
+  color: black;
+  height: 40px;
+  margin-top: 10px;
+}
+
+body main .login-page p, body main .signup-page p {
+  text-align: center;
+}
+
+body main .login-page .forgot-psw, body main .signup-page .forgot-psw {
+  margin-top: 20px;
+}
+
+body main .login-page .new-here, body main .signup-page .new-here {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+body main .signup-page .alternative-signup {
+  margin: 20px auto 50px auto;
+}
+
+body main .signup-page .alternative-signup button {
+  width: 50%;
+  height: 40px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+body main .home-not-logged-in {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+  padding: 15px;
+}
+
+body main .home-not-logged-in .welcome-msg {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+}
+
+body main .home-not-logged-in .welcome-msg h2 {
+  color: black;
+  padding-bottom: 20px;
+  border-bottom: 1px solid red;
+  margin-bottom: 10px;
+}
+
+body main .home-not-logged-in .welcome-msg .dollor {
+  background-color: #09ff00;
+  background-color: gold;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+body main .home-not-logged-in .difficulties, body main .home-not-logged-in .categories {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+}
+
+body main .home-not-logged-in .difficulties h2, body main .home-not-logged-in .categories h2 {
+  color: black;
+  padding-bottom: 20px;
+  border-bottom: 1px solid red;
+}
+
+body main .home-not-logged-in .difficulties ul, body main .home-not-logged-in .categories ul {
+  margin-top: 10px;
+  list-style-type: none;
+}
+
+body main .home-not-logged-in .difficulties ul li, body main .home-not-logged-in .categories ul li {
+  margin: 5px auto;
+  border-bottom: blue 1px solid;
+}
+
+body main .home-not-logged-in .btn-get-started {
+  background-color: #09ff00;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+body main .home-logged-in {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+  margin-top: 10px;
+  padding: 15px;
+}
+
+body main .home-logged-in > h1 {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+  padding: 40px;
+}
+
+body main .home-logged-in .records .records-progessbars {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  line-height: 25px;
+}
+
+body main .home-logged-in .records .records-progessbars section {
+  text-align: left;
+}
+
+body main .home-logged-in .records .records-progessbars h1, body main .home-logged-in .records .records-progessbars h2 {
+  padding: 10px 0;
+  text-align: center;
+}
+
+body main .home-logged-in .records .noquizpassed {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+body main .home-logged-in .records .rating {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+  padding: 90px 0;
+}
+
+body main .home-logged-in .records .rating .fa-star {
+  color: yellow;
+  font-size: 80px;
+  -webkit-animation: star-anim infinite 10s linear;
+          animation: star-anim infinite 10s linear;
+}
+
+body main .home-logged-in .records .rating span {
+  position: relative;
+  top: -50px;
+  font-weight: bold;
+}
+
+body main .home-logged-in .btn-take-quiz {
+  background-color: #09ff00;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+body main .home-logged-in .btn-logout {
+  background-color: #09ff00;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  background-color: #f83030;
+}
+
+body main .quiz-selection {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+  padding: 15px;
+}
+
+body main .quiz-selection section {
+  text-align: center;
+  border: 2px dashed #f83030;
+  border-radius: 20px 0 20px 0;
+  background-color: #d1ccee;
+  padding: 20px 5%;
+  margin-bottom: 10px;
+  text-align: left;
+  padding: 40px 15px;
+}
+
+body main .quiz-selection section h2 {
+  padding-bottom: 20px;
+}
+
+body main .quiz-selection .notice div {
+  border-bottom: 2px solid #f83030;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+body main .quiz-selection .notice div ul {
+  list-style-position: inside;
+}
+
+body main .quiz-selection .notice div ul li {
+  padding-bottom: 8px;
+}
+
+body main .quiz-selection .notice div .happy-assessment {
+  margin-top: 20px;
+}
+
+body main .quiz-selection form label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+body main .quiz-selection form label * {
+  display: block;
+  width: 100%;
+  height: 30px;
+}
+
+body main .quiz-selection form .btn-start-quiz {
+  background-color: #09ff00;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  margin: 10px 0 0 0;
+}
+
+body main .questions {
+  -webkit-animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+          animation: main-elements-anim 1s linear, opacity-anim 1s linear;
+  padding: 2%;
+}
+
+body main .questions .category {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 2px solid #09ff00;
+  margin-bottom: 30px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+body main .questions .question .q-number, body main .questions .question .answers li span {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color: #09ff00;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.7em;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  -webkit-box-shadow: 0 1px red;
+          box-shadow: 0 1px red;
+  padding: 2px 0;
+  color: white;
+  text-shadow: 2px 2px #f83030;
+}
+
+body main .questions .question .answers {
+  margin: 10px 0 25px 0;
+}
+
+body main .questions .question .answers li {
+  list-style-type: none;
+  padding: 5px;
+  margin: 5px;
+  color: #424957;
+  border: 2px solid #a9aeb8;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+body main .questions .question .answers li:hover {
+  cursor: pointer;
+}
+
+body main .questions .question .answers li:hover span {
+  background-color: #09ff00;
+}
+
+body main .questions .question .answers li span {
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  text-shadow: 1px 1px #f83030;
+  background-color: #a9aeb8;
+}
+
+body main .questions .question .answers li .selected-answer {
+  background-color: #09ff00;
+}
+
+body main .questions .question .answers .correct-answer {
+  border-color: #09ff00;
+  color: #09ff00;
+}
+
+body main .questions .question .answers .correct-answer span {
+  background-color: #09ff00;
+}
+
+body main .questions .question .answers .wrong-answer {
+  border-color: #f83030;
+  color: #f83030;
+}
+
+body main .questions .question .answers .wrong-answer span {
+  background-color: #f83030;
+  -webkit-box-shadow: 1px 1px #09ff00;
+          box-shadow: 1px 1px #09ff00;
+}
+
+body main .questions .result div:first-child {
+  margin: 20px 0;
+  padding: 20px;
+  text-align: center;
+  background-color: #09ff00;
+  border-radius: 10px;
+  font-weight: bold;
+  -webkit-animation: opacity-anim 1s ease-in;
+          animation: opacity-anim 1s ease-in;
+}
+
+body main .questions .result div:first-child progress {
+  -webkit-animation: opacity-anim 1s ease-in;
+          animation: opacity-anim 1s ease-in;
+  width: 100%;
+  height: 20px;
+}
+
+body main .questions .result div .back-to-home, body main .questions .result div .take-another-quiz {
+  background-color: #09ff00;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+body main .questions .btn-submit {
+  background-color: #09ff00;
+  border-radius: 5px;
+  font-weight: 900;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+body main .alert-box {
+  position: fixed;
+  inset: 0 0 0 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-animation: opacity-anim 1s ease-in-out;
+          animation: opacity-anim 1s ease-in-out;
+}
+
+body main .alert-box div {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 250px;
+}
+
+body main .alert-box div p:first-child {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+body main .alert-box div hr {
+  margin: 10px 0 30px 0;
+}
+
+body main .alert-box div p:last-child {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+body main footer p {
+  text-align: center;
+  padding: 20px 0;
+}
+
+body main footer p a {
+  color: #09ff00;
+}
+
+@media (min-width: 577px) {
+  body main {
+    width: 80%;
+  }
+  body main header {
+    inset: 0 10% auto 10%;
+  }
+  body main .home-logged-in .records .rating .fa-star {
+    font-size: 90px;
+  }
+}
+
+@media (min-width: 769px) {
+  body main {
+    width: 70%;
+  }
+  body main header {
+    inset: 0 15% auto 15%;
+  }
+  body main header .user {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  body main header .user .avatar {
+    margin-right: 8px;
+  }
+  body main .home-logged-in .records p {
+    padding: 40px;
+  }
+  body main .home-logged-in .records .rating .fa-star {
+    font-size: 100px;
+  }
+  body main .home-logged-in .records .rating span {
+    top: -60px;
+  }
+}
+
+@media (min-width: 981px) {
+  body main {
+    width: 60%;
+  }
+  body main header {
+    inset: 0 20% auto 20%;
+  }
+}
+
+@media (min-width: 1281px) {
+  body main {
+    width: 50%;
+  }
+  body main header {
+    inset: 0 25% auto 25%;
+  }
+}
+
+@media (min-width: 1401px) {
+  body main {
+    width: 40%;
+  }
+  body main header {
+    inset: 0 30% auto 30%;
+  }
+}
+
+@-webkit-keyframes opacity-anim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes opacity-anim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes rotate-anim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    background-color: blue;
+  }
+}
+
+@keyframes rotate-anim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+    background-color: blue;
+  }
+}
+
+@-webkit-keyframes star-anim {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes star-anim {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rainbow-anim {
+  0% {
+    background-color: #f1efef;
+  }
+  25% {
+    background-color: #d5ecb3;
+  }
+  50% {
+    background-color: rgba(195, 235, 134, 0.877);
+  }
+  75% {
+    background-color: rgba(215, 231, 155, 0.911);
+  }
+}
+
+@keyframes rainbow-anim {
+  0% {
+    background-color: #f1efef;
+  }
+  25% {
+    background-color: #d5ecb3;
+  }
+  50% {
+    background-color: rgba(195, 235, 134, 0.877);
+  }
+  75% {
+    background-color: rgba(215, 231, 155, 0.911);
+  }
+}
+
+@-webkit-keyframes main-elements-anim {
+  40% {
+    -webkit-transform: rotate(1deg);
+            transform: rotate(1deg);
+  }
+  80% {
+    -webkit-transform: rotate(-1deg);
+            transform: rotate(-1deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@keyframes main-elements-anim {
+  40% {
+    -webkit-transform: rotate(1deg);
+            transform: rotate(1deg);
+  }
+  80% {
+    -webkit-transform: rotate(-1deg);
+            transform: rotate(-1deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+/*# sourceMappingURL=index.css.map */
