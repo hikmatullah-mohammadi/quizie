@@ -3,7 +3,7 @@ const Footer = () => (
     <hr />
     <p>
       Developed by <a href="https://hikmatullah-mohammadi.netlify.app/">Hikmatullah Mohammadi.</a>
-      <br />&copy; Copyright 2022.
+      <br />&copy; Copyright 2023
     </p>
   </footer>
 )
