@@ -55,7 +55,9 @@ const HomeLoggedIn = () => {
         className="btn-logout"
         onClick={async () => {
           dispatch(setIsWaiting(true))
-          logout()
+          logout({
+            returnTo: 'https://quizie.onrender.com/',
+          })
           dispatch(setIsWaiting(false))
         }}
       >
