@@ -24,7 +24,7 @@ Quizie is a platform where you can take multiple-choice quizes about different s
 ### Links
 
 - Source code URL: [Quizie on Github](https://www.github.com/hikmatullah-mohammadi/quizie)
-- Live Site URL: [Quizie on Heroku](https://www.hm-quizie.herokuapp.com)
+- Live Site URL: [Quizie on Render](https://quizie.onrender.com/)
 
 ## Screen shots
 ### Home not logged in
